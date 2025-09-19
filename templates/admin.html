@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='icon.png') }}">
+    <title>Admin Dashboard | Stella Maris Food Claims</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3a86ff;
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.25);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --success: rgba(40, 167, 69, 0.7);
+            --warning: rgba(255, 193, 7, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #a0adb9 0%, #388fe6 100%);
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            line-height: 1.6;
+        }
+
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Glass Panel Base Styles */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .glass-panel:hover {
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    
+        }
+
+        /* Header */
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 200px;
+            height: auto;
+        }
+
+        .admin-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 0;
+            margin-left: 152px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .back-link svg {
+            margin-right: 8px;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-card h3 {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .stat-card p {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .filter-label {
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+            white-space: nowrap;
+        }
+
+        .date-filter {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(250, 249, 249, 0.2);
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500; 
+            color: rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), 
+                        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            transition: all 0.3s ease;
+            min-width: 200px;
+            outline: none;
+        }
+
+        .date-filter:hover {
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(248, 247, 247, 0.2) inset;
+        }
+
+        .date-filter::-webkit-calendar-picker-indicator {
+            filter: invert(1); /* makes black icon white */
+            cursor: pointer;
+        }
+
+        /* Date Range Container */
+        .date-range-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .date-range-divider {
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+        }
+
+        /* Export Buttons */
+        .export-buttons {
+            display: flex;
+            gap: 10px;
+            margin-left: auto;
+        }
+
+        .export-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .export-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .export-btn.pdf {
+            background: rgba(231, 76, 60, 0.7);
+        }
+
+        .export-btn.pdf:hover {
+            background: rgba(231, 76, 60, 0.9);
+        }
+
+        .export-btn.excel {
+            background: rgba(39, 174, 96, 0.7);
+        }
+
+        .export-btn.excel:hover {
+            background: rgba(39, 174, 96, 0.9);
+        }
+
+        /* Table */
+        .table-container {
+            overflow-x: auto;
+        }
+
+        .claims-table {
+            width: 100%;
+            border-collapse: collapse;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .claims-table th {
+            background: rgba(58, 134, 255, 0.5);
+            color: white;
+            font-weight: 500;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .claims-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .claims-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .claims-table tr:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: rgba(58, 134, 255, 0.5);
+        }
+
+        .btn-primary:hover {
+            background: rgba(58, 134, 255, 0.9);
+        }
+
+        /* Flash Messages */
+        .flash-messages {
+            margin-bottom: 2rem;
+        }
+
+        .flash-message {
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            backdrop-filter: blur(8px);
+        }
+
+        .flash-success {
+            background: rgba(40, 167, 69, 0.2);
+            color: #d4edda;
+            border: 1px solid rgba(40, 167, 69, 0.3);
+        }
+
+        .flash-warning {
+            background: rgba(255, 193, 7, 0.2);
+            color: #fff3cd;
+            border: 1px solid rgba(255, 193, 7, 0.3);
+        }
+
+        /* Footer */
+        .site-footer {
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 2rem;
+        }
+
+        /* No Data Message */
+        .no-data {
+            text-align: center;
+            padding: 2rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-style: italic;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            display: none;
+        }
+
+        .modal-content {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 2rem;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .modal-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .modal-btn.cancel {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .modal-btn.cancel:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-btn.submit {
+            background: rgba(58, 134, 255, 0.7);
+            color: white;
+        }
+
+        .modal-btn.submit:hover {
+            background: rgba(58, 134, 255, 0.9);
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .admin-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-section {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .date-range-container {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .date-range-container .date-filter {
+                flex: 1;
+                min-width: 0;
+            }
+            
+            .export-buttons {
+                width: 100%;
+                justify-content: flex-start;
+                margin-left: 0;
+                margin-top: 15px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .claims-table {
+                font-size: 0.9rem;
+            }
+            
+            .claims-table th, 
+            .claims-table td {
+                padding: 0.75rem 0.5rem;
+            }
+
+            .modal-content {
+                width: 95%;
+                padding: 1.5rem;
+            }
+        }
+
+        /* Ensure dropdown options are visible */
+        .date-filter option {
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 8px;
+        }
+
+        /* For Firefox */
+        @-moz-document url-prefix() {
+            .date-filter option {
+                background: black;
+                color: white;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Header -->
+        <div class="glass-panel admin-header">
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='LOGO_KANTIN.png') }}" alt="Stella Maris Logo" class="logo">
+                <h1 class="admin-title">Administrasi Klaim Makanan</h1>
+            </div>
+            <a href="/" class="back-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                Balik ke Home
+            </a>
+        </div>
+
+        <!-- Flash Messages -->
+        <div class="flash-messages">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="flash-message flash-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="glass-panel stat-card">
+                <h3>Hari Ini Klaim</h3>
+                <p>{{ today_claims }}</p>
+            </div>
+            <div class="glass-panel stat-card">
+                <h3>Minggu Ini</h3>
+                <p>{{ week_claims }}</p>
+            </div>
+            <div class="glass-panel stat-card">
+                <h3>Total Klaim</h3>
+                <p>{{ claims|length }}</p>
+            </div>
+        </div>
+
+        <!-- Filter and Export Section -->
+        <div class="filter-section">
+            <div class="filter-options">
+                <div class="date-range-container">
+                    <label class="filter-label">Rentang Tanggal:</label>
+                    <div class="date-inputs">
+                        <input type="date" id="startDate" class="date-filter" onchange="filterByDateRange()">
+                        <span class="date-range-divider">sampai</span>
+                        <input type="date" id="endDate" class="date-filter" onchange="filterByDateRange()">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="export-buttons">
+                <button onclick="exportTableToPDF()" class="export-btn pdf">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                    Ekspor PDF
+                </button>
+                <button onclick="exportTableToExcel()" class="export-btn excel">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <path d="M8 13h8M8 17h8M8 9h1"></path>
+                    </svg>
+                    Ekspor Excel
+                </button>
+            </div>
+        </div>
+
+        <div class="glass-panel">
+            <div class="table-container">
+                <table class="claims-table" id="claimsTable">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Karyawan</th>
+                            <th>Tanggal</th>
+                            <th>Jam</th>
+                        </tr>
+                    </thead>
+                    <tbody id="claimsTableBody">
+                        {% for claim in claims %}
+                        <tr data-date="{{ claim.claim_date.strftime('%Y-%m-%d') }}">
+                            <td>{{ loop.index }}</td>
+                            <td>{{ claim.employee.name }}</td>
+                            <td>{{ claim.claim_date|indo_day_date }}</td>
+                            <td>{{ claim.claim_date|format_jakarta_time }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div id="noDataMessage" class="no-data" style="display: none;">
+                Tidak ada klaim untuk rentang tanggal ini.
+            </div>
+            
+            <!-- Pagination Controls -->
+            <div class="pagination-container glass-panel">
+                <div class="pagination-info">
+                    Menampilkan <span id="currentPageStart">1</span> - <span id="currentPageEnd">10</span> dari <span id="totalItems">{{ claims|length }}</span> data
+                </div>
+                <div class="pagination-controls">
+                    <button id="firstPage" class="pagination-btn" onclick="goToPage(1)" disabled>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="11 17 6 12 11 7"></polyline>
+                            <polyline points="18 17 13 12 18 7"></polyline>
+                        </svg>
+                    </button>
+                    <button id="prevPage" class="pagination-btn" onclick="changePage(-1)" disabled>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    
+                    <div class="page-numbers" id="pageNumbers"></div>
+                    
+                    <button id="nextPage" class="pagination-btn" onclick="changePage(1)">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                    <button id="lastPage" class="pagination-btn" onclick="goToLastPage()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="13 17 18 12 13 7"></polyline>
+                            <polyline points="6 17 11 12 6 7"></polyline>
+                        </svg>
+                    </button>
+                </div>
+                <div class="page-size-selector">
+                    <label for="pageSize">Baris per halaman:</label>
+                    <select id="pageSize" onchange="changePageSize()">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <a href="#" id="employeeListBtn" class="btn btn-primary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="8.5" cy="7" r="4"></circle>
+                    <line x1="20" y1="8" x2="20" y1="14"></line>
+                    <line x1="23" y1="11" x2="17" y1="11"></line>
+                </svg>
+                Lihat Daftar Karyawan
+            </a>
+        </div>
+    </div>
+
+    <!-- Authentication Modal -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Autentikasi Diperlukan</h2>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <form id="authForm">
+                <div class="form-group">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" id="username" class="form-input" placeholder="Masukkan username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" class="form-input" placeholder="Masukkan password" required>
+                </div>
+                <div id="errorMessage" class="error-message">
+                    Username atau password salah!
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="modal-btn cancel" id="cancelAuth">Batal</button>
+                    <button type="submit" class="modal-btn submit">Masuk</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        © 2025 IT Stella Maris School. All rights reserved.
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+    <style>
+        /* Filter Section Styles */
+        .filter-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .date-range-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .date-inputs {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* Pagination Styles */
+        .pagination-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 12px;
+            backdrop-filter: none;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255  , 255, 0.2);
+        }
+
+        .pagination-info {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .pagination-controls {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .pagination-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 8px;
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pagination-btn:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .pagination-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .page-numbers {
+            display: flex;
+            gap: 5px;
+        }
+
+        .page-number {
+            min-width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .page-number:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .page-number.active {
+            background: rgba(58, 134, 255, 0.5);
+            border-color: rgba(58, 134, 255, 0.5);
+        }
+
+        .page-ellipsis {
+            min-width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .page-size-selector {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .page-size-selector label {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .page-size-selector select {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 6px;
+            padding: 6px 10px;
+            outline: none;
+        }
+
+        .page-size-selector select option {
+            background: rgba(30, 30, 40, 0.95);
+            color: white;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .filter-section {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .date-range-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .pagination-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .pagination-controls {
+                order: 1;
+            }
+            
+            .pagination-info {
+                order: 2;
+            }
+            
+            .page-size-selector {
+                order: 3;
+            }
+        }
+    </style>
+
+    <script>
+        // Pagination variables
+        let currentPage = 1;
+        let pageSize = 10;
+        let filteredClaims = [];
+        let allClaims = [];
+        
+        // Authentication variables
+        const USERS = {
+            "admin": "stellamaris",
+            "handrow": "stellamaris"
+        };
+        let isAuthenticated = false;
+        let currentUser = "";
+
+        // DOM Elements
+        const authModal = document.getElementById('authModal');
+        const employeeListBtn = document.getElementById('employeeListBtn');
+        const closeModal = document.getElementById('closeModal');
+        const cancelAuth = document.getElementById('cancelAuth');
+        const authForm = document.getElementById('authForm');
+        const errorMessage = document.getElementById('errorMessage');
+
+        // Initialize when page loads
+        document.addEventListener("DOMContentLoaded", function () {
+            // Store all claims for filtering
+            const rows = document.querySelectorAll("#claimsTableBody tr");
+            allClaims = Array.from(rows);
+            filteredClaims = Array.from(rows);
+            
+            // Set default date range to today
+            const today = new Date();
+            const formattedToday = today.toISOString().split("T")[0];
+            document.getElementById("startDate").value = formattedToday;
+            document.getElementById("endDate").value = formattedToday;
+            
+            // Filter to show only today's claims by default
+            filterByDateRange();
+            
+            // Initialize pagination
+            updatePagination();
+        });
+
+        // Date range filtering function
+        function filterByDateRange() {
+            const startDate = document.getElementById("startDate").value;
+            const endDate = document.getElementById("endDate").value;
+            
+            filteredClaims = allClaims.filter(row => {
+                const rowDate = row.getAttribute("data-date");
+                let showRow = false;
+                
+                // If both dates are empty, show all rows
+                if (!startDate && !endDate) {
+                    showRow = true;
+                }
+                // If only start date is selected
+                else if (startDate && !endDate) {
+                    showRow = rowDate >= startDate;
+                }
+                // If only end date is selected
+                else if (!startDate && endDate) {
+                    showRow = rowDate <= endDate;
+                }
+                // If both dates are selected
+                else {
+                    showRow = rowDate >= startDate && rowDate <= endDate;
+                }
+                
+                return showRow;
+            });
+            
+            // Reset to first page and update pagination
+            currentPage = 1;
+            updatePagination();
+        }
+
+        // Pagination functions
+        function updatePagination() {
+            const totalItems = filteredClaims.length;
+            const totalPages = Math.ceil(totalItems / pageSize);
+            
+            // Update pagination info
+            document.getElementById('totalItems').textContent = totalItems;
+            document.getElementById('currentPageStart').textContent = totalItems > 0 ? ((currentPage - 1) * pageSize) + 1 : 0;
+            document.getElementById('currentPageEnd').textContent = Math.min(currentPage * pageSize, totalItems);
+            
+            // Update button states
+            document.getElementById('firstPage').disabled = currentPage === 1;
+            document.getElementById('prevPage').disabled = currentPage === 1;
+            document.getElementById('nextPage').disabled = currentPage === totalPages || totalPages === 0;
+            document.getElementById('lastPage').disabled = currentPage === totalPages || totalPages === 0;
+            
+            // Generate page numbers
+            generatePageNumbers(totalPages);
+            
+            // Show current page items
+            showCurrentPageItems();
+        }
+        
+        function generatePageNumbers(totalPages) {
+            const pageNumbersContainer = document.getElementById('pageNumbers');
+            pageNumbersContainer.innerHTML = '';
+            
+            if (totalPages === 0) return;
+            
+            // Always show first page
+            addPageNumber(1, totalPages);
+            
+            // Calculate range of pages to show
+            let startPage = Math.max(2, currentPage - 1);
+            let endPage = Math.min(totalPages - 1, currentPage + 1);
+            
+            // Add ellipsis if needed after first page
+            if (startPage > 2) {
+                const ellipsis = document.createElement('span');
+                ellipsis.className = 'page-ellipsis';
+                ellipsis.textContent = '...';
+                pageNumbersContainer.appendChild(ellipsis);
+            }
+            
+            // Add middle pages
+            for (let i = startPage; i <= endPage; i++) {
+                addPageNumber(i, totalPages);
+            }
+            
+            // Add ellipsis if needed before last page
+            if (endPage < totalPages - 1) {
+                const ellipsis = document.createElement('span');
+                ellipsis.className = 'page-ellipsis';
+                ellipsis.textContent = '...';
+                pageNumbersContainer.appendChild(ellipsis);
+            }
+            
+            // Always show last page if there is more than one page
+            if (totalPages > 1) {
+                addPageNumber(totalPages, totalPages);
+            }
+        }
+        
+        function addPageNumber(page, totalPages) {
+            // Don't add duplicate page numbers
+            if (document.querySelector(`.page-number[data-page="${page}"]`)) {
+                return;
+            }
+            
+            const pageNumber = document.createElement('button');
+            pageNumber.className = 'page-number';
+            pageNumber.textContent = page;
+            pageNumber.setAttribute('data-page', page);
+            
+            if (page === currentPage) {
+                pageNumber.classList.add('active');
+            }
+            
+            pageNumber.addEventListener('click', () => goToPage(page));
+            document.getElementById('pageNumbers').appendChild(pageNumber);
+        }
+        
+        function showCurrentPageItems() {
+            const startIndex = (currentPage - 1) * pageSize;
+            const endIndex = Math.min(startIndex + pageSize, filteredClaims.length);
+            
+            // Hide all rows first
+            allClaims.forEach(row => row.style.display = "none");
+            
+            // Show only rows for current page
+            for (let i = startIndex; i < endIndex; i++) {
+                if (filteredClaims[i]) {
+                    filteredClaims[i].style.display = "";
+                    // Update row numbers
+                    filteredClaims[i].querySelector("td:first-child").textContent = i + 1;
+                }
+            }
+            
+            // Show "no data" message if nothing is visible
+            document.getElementById("noDataMessage").style.display = 
+                filteredClaims.length === 0 ? "block" : "none";
+        }
+        
+        function changePage(direction) {
+            const totalPages = Math.ceil(filteredClaims.length / pageSize);
+            const newPage = currentPage + direction;
+            
+            if (newPage > 0 && newPage <= totalPages) {
+                currentPage = newPage;
+                updatePagination();
+            }
+        }
+        
+        function goToPage(page) {
+            const totalPages = Math.ceil(filteredClaims.length / pageSize);
+            
+            if (page > 0 && page <= totalPages) {
+                currentPage = page;
+                updatePagination();
+            }
+        }
+        
+        function goToLastPage() {
+            const totalPages = Math.ceil(filteredClaims.length / pageSize);
+            goToPage(totalPages);
+        }
+        
+        function changePageSize() {
+            pageSize = parseInt(document.getElementById('pageSize').value);
+            currentPage = 1; // Reset to first page
+            updatePagination();
+        }
+
+        // Export functions - FIXED to export all filtered data
+function exportTableToPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    const startDate = document.getElementById("startDate").value;
+    const endDate = document.getElementById("endDate").value;
+    
+    let fileName, title;
+    
+    if (startDate && endDate) {
+        const formattedStartDate = formatDateToIndonesian(startDate);
+        const formattedEndDate = formatDateToIndonesian(endDate);
+
+        if (startDate === endDate) {
+            fileName = `Laporan_Klaim_${formattedStartDate.replace(/ /g, '_')}.pdf`;
+            title = `Laporan Klaim - ${formattedStartDate}`;
+        } else {
+            fileName = `Laporan_Klaim_${formattedStartDate.replace(/ /g, '_')}_sampai_${formattedEndDate.replace(/ /g, '_')}.pdf`;
+            title = `Laporan Klaim - ${formattedStartDate} sampai ${formattedEndDate}`;
+        }
+    } else {
+        fileName = 'Laporan_Klaim_Semua.pdf';
+        title = 'Laporan Klaim - Semua Data';
+    }
+    
+    // Add title
+    doc.setFontSize(12);
+    doc.text(title, 14, 10);
+
+    // Group claims by date
+    const groupedClaims = {};
+    filteredClaims.forEach(row => {
+        const rowDate = row.getAttribute("data-date"); // assuming you stored date in data-date
+        if (!groupedClaims[rowDate]) {
+            groupedClaims[rowDate] = [];
+        }
+        groupedClaims[rowDate].push(row);
+    });
+
+    let yPosition = 20;
+    let pageHeight = doc.internal.pageSize.height;
+
+    Object.keys(groupedClaims).forEach((date, groupIndex) => {
+        if (groupIndex > 0) {
+            doc.addPage();
+            yPosition = 20;
+        }
+
+        // Add date header
+        const formattedDate = formatDateToIndonesian(date);
+        doc.setFontSize(11);
+        doc.text(`Tanggal: ${formattedDate}`, 14, yPosition);
+        yPosition += 6;
+
+        // Create a temporary table for this date
+        const tempTable = document.createElement('table');
+        tempTable.innerHTML = document.getElementById('claimsTable').innerHTML;
+
+        const tbody = tempTable.querySelector('tbody');
+        tbody.innerHTML = '';
+
+        groupedClaims[date].forEach((row, index) => {
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = row.innerHTML;
+            newRow.cells[0].textContent = index + 1;
+            tbody.appendChild(newRow);
+        });
+
+        // Add table for this date
+        doc.autoTable({
+            html: tempTable,
+            startY: yPosition,
+            theme: 'grid',
+            styles: { fontSize: 9 },
+            headStyles: { fillColor: [58, 134, 255] }
+        });
+
+        yPosition = doc.lastAutoTable.finalY + 10;
+    });
+
+    doc.save(fileName);
+}
+
+
+        // Helper function to format date to Indonesian format
+        function formatDateToIndonesian(dateString) {
+            const date = new Date(dateString);
+            const day = date.getDate();
+            const month = date.getMonth();
+            const year = date.getFullYear();
+            
+            const monthNames = [
+                "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+                "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+            ];
+            
+            return `${day} ${monthNames[month]} ${year}`;
+        }
+
+        function exportTableToExcel() {
+            const startDate = document.getElementById("startDate").value;
+            const endDate = document.getElementById("endDate").value;
+            
+            let fileName;
+            
+            if (startDate && endDate) {
+                // Convert dates to Indonesian format for filename
+                const formattedStartDate = formatDateToIndonesian(startDate);
+                const formattedEndDate = formatDateToIndonesian(endDate);
+                
+                if (startDate === endDate) {
+                    fileName = `Laporan_Klaim_${formattedStartDate.replace(/ /g, '_')}.xlsx`;
+                } else {
+                    fileName = `Laporan_Klaim_${formattedStartDate.replace(/ /g, '_')}_sampai_${formattedEndDate.replace(/ /g, '_')}.xlsx`;
+                }
+            } else {
+                fileName = 'Laporan_Klaim_Semua.xlsx';
+            }
+            
+            // Create a temporary table with all filtered data
+            const tempTable = document.createElement('table');
+            tempTable.innerHTML = document.getElementById('claimsTable').innerHTML;
+            
+            // Remove all rows from the temporary table
+            const tbody = tempTable.querySelector('tbody');
+            tbody.innerHTML = '';
+            
+            // Add all filtered rows to the temporary table
+            filteredClaims.forEach((row, index) => {
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = row.innerHTML;
+                
+                // Update the row number to reflect the actual position in filtered data
+                newRow.cells[0].textContent = index + 1;
+                
+                tbody.appendChild(newRow);
+            });
+            
+            // Format date cells in the temporary table
+            const rows = tempTable.rows;
+            for (let i = 1; i < rows.length; i++) { // Skip header row (i=0)
+                const cells = rows[i].cells;
+                // Date is in the 3rd column (index 2)
+                const dateCellIndex = 2;
+                
+                if (cells.length > dateCellIndex) {
+                    const originalDate = cells[dateCellIndex].textContent;
+                    if (originalDate) {
+                        try {
+                            // Format the date to Indonesian format
+                            const formattedDate = formatDateToIndonesian(originalDate);
+                            cells[dateCellIndex].textContent = formattedDate;
+                        } catch (e) {
+                            console.log('Error formatting date:', e);
+                        }
+                    }
+                }
+            }
+            
+            // Convert the formatted table to Excel
+            let workbook = XLSX.utils.table_to_book(tempTable, { sheet: "Laporan Klaim" });
+            XLSX.writeFile(workbook, fileName);
+        }
+
+        // Event Listeners
+        employeeListBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (isAuthenticated) {
+                // If already authenticated, redirect to employee list
+                window.location.href = "{{ url_for('employee_list') }}";
+            } else {
+                // Show authentication modal
+                authModal.style.display = 'flex';
+            }
+        });
+
+        closeModal.addEventListener('click', function() {
+            authModal.style.display = 'none';
+            resetForm();
+        });
+
+        cancelAuth.addEventListener('click', function() {
+            authModal.style.display = 'none';
+            resetForm();
+        });
+
+        authForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                if (response.ok) {
+                    isAuthenticated = true;
+                    currentUser = username;
+                    authModal.style.display = 'none';
+                    resetForm();
+                    window.location.href = "{{ url_for('employee_list') }}";
+                } else {
+                    errorMessage.style.display = 'block';
+                    document.getElementById('password').value = '';
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        });
+
+        function resetForm() {
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            errorMessage.style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target === authModal) {
+                authModal.style.display = 'none';
+                resetForm();
+            }
+        });
+    </script>
+</body>
+</html>

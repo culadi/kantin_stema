@@ -1,0 +1,128 @@
+:root {
+    --primary: #ffffff;
+    --secondary: #e8a317;
+    --success: #28a745;
+    --error: #dc3545;
+    --light: #f8f9fa;
+    --dark: #343a40;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #eaeaea; /* You can change this to any solid color */
+    color: #333; /* Adjust for readability */
+    line-height: 1.6;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    padding: 2.5rem;
+    text-align: center;
+}
+
+
+h2 {
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+input:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(44, 95, 168, 0.2);
+}
+
+button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #1e4b8f;
+    transform: translateY(-2px);
+}
+
+.admin-link {
+    display: block;
+    margin-top: 1.5rem;
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.admin-link:hover {
+    color: #1e4b8f;
+    text-decoration: underline;
+}
+
+.message {
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+.success {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: var(--success);
+    border: 1px solid rgba(40, 167, 69, 0.3);
+}
+
+.error {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: var(--error);
+    border: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+.divider {
+    margin: 1.5rem 0;
+    height: 1px;
+    background-color: #e0e0e0;
+}
+
+.logo {
+    transform: scale(2.0);  /* 1.0 is default size, increase for bigger */
+}
+
+
+

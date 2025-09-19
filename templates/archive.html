@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arsip Karyawan</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='icon.png') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            padding: 20px;
+            background: linear-gradient(135deg, #a0adb9 0%, #388fe6 100%);
+            min-height: 100vh;
+            margin: 0;
+            color: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .flash-container {
+            margin-bottom: 20px;
+        }
+        
+        .flash-message {
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-weight: 500;
+            backdrop-filter: blur(8px);
+            animation: fadeIn 0.5s, fadeOut 0.5s 4.5s forwards;
+            overflow: hidden;
+        }
+        
+        @keyframes fadeOut {
+            from { 
+                opacity: 1; 
+                transform: translateY(0);
+                max-height: 100px;
+                margin-bottom: 15px;
+            }
+            to { 
+                opacity: 0; 
+                transform: translateY(-20px);
+                max-height: 0;
+                margin-bottom: 0;
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+        }
+        
+        .alert-success {
+            background: rgba(40, 167, 69, 0.2);
+            color: #d4edda;
+            border: 1px solid rgba(40, 167, 69, 0.3);
+        }
+        
+        .alert-danger {
+            background: rgba(220, 53, 69, 0.2);
+            color: #f8d7da;
+            border: 1px solid rgba(220, 53, 69, 0.3);
+        }
+        
+        .alert-warning {
+            background: rgba(255, 193, 7, 0.2);
+            color: #fff3cd;
+            border: 1px solid rgba(255, 193, 7, 0.3);
+        }
+        
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(-10px);
+                max-height: 0;
+                margin-bottom: 0;
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+                max-height: 100px;
+                margin-bottom: 15px;
+            }
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        h2 {
+            color: white;
+            margin: 0;
+            font-weight: 600;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            margin-right: 500px;
+        }
+        
+        .btn-back {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+        
+        .btn-back:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn {
+            font-family: 'Poppins', sans-serif; /* or whatever you use */
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .btn-add {
+            background-color: rgba(40, 167, 69, 0.7);
+        }
+        
+        .btn-add:hover {
+            background-color: rgba(40, 167, 69, 0.9);
+        }
+        
+        .btn-restore {
+            background-color: rgba(106, 176, 76, 0.8);
+        }
+        
+        .btn-restore:hover {
+            background-color: rgba(77, 129, 54, 0.8);
+        }
+        
+        .btn-archive {
+            background-color: rgba(151, 92, 228, 0.8);
+        }
+        
+        .btn-archive:hover {
+            background-color: rgba(117, 68, 180, 0.8);
+        }
+        
+        .controls-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .search-container {
+            position: relative;
+            flex: 1;
+            max-width: 400px;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 10px 15px 10px 40px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.15);
+            color: white;
+            font-size: 14px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: rgba(58, 134, 255, 0.8);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .pagination {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .page-size-select {
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.15);
+            color: white;
+            backdrop-filter: blur(5px);
+        }
+        
+        .page-size-select option {
+            background: rgba(0, 0, 0, 0.7);
+        }
+        
+        .pagination-button {
+            background-color: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .pagination-button:hover:not(:disabled) {
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+        
+        .pagination-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .pagination-info {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }s
+        
+        th {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        tr {
+            background: rgba(255, 255, 255, 0);
+            transition: all 0.3s ease;
+        }
+        
+        tr:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(5px);
+        }
+        
+        td {
+            font-weight: 300;
+            position: relative;
+        }
+        
+        td:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .btn-edit, .btn-delete, .btn-history, .btn-restore {
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .btn-edit {
+            background-color: rgba(41, 128, 185, 0.8);
+            color: white;
+        }
+        
+        .btn-edit:hover {
+            background-color: rgba(31, 97, 141, 0.8);
+            transform: translateY(-2px);
+        }
+        
+        .btn-delete {
+            background-color: rgba(231, 76, 60, 0.8);
+            color: white;
+        }
+        
+        .btn-delete:hover {
+            background-color: rgba(192, 57, 43, 0.8);
+            transform: translateY(-2px);
+        }
+        
+        .btn-history {
+            background-color: rgba(241, 196, 15, 0.8);
+            color: white;
+        }
+        
+        .btn-history:hover {
+            background-color: rgba(213, 172, 13, 0.8);
+            transform: translateY(-2px);
+        }
+        
+        .btn-restore {
+            background-color: rgba(106, 176, 76, 0.8);
+            color: white;
+        }
+        
+        .btn-restore:hover {
+            background-color: rgba(77, 129, 54, 0.8);
+            transform: translateY(-2px);
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 30px;
+            color: rgba(255, 255, 255, 0.7);
+            font-style: italic;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            padding: 25px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .modal-title {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 95%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: rgba(58, 134, 255, 0.8);
+            background: rgba(255, 255, 255, 0.25);
+        }
+        
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .btn-cancel {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .btn-cancel:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-save {
+            background-color: rgba(40, 167, 69, 0.7);
+            color: white;
+        }
+        
+        .btn-save:hover {
+            background-color: rgba(40, 167, 69, 0.9);
+        }
+        
+        .food-history-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .food-history-content {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            padding: 25px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+        
+        .history-table th, .history-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .history-table th {
+            background: rgba(255, 255, 255, 0.2);
+            font-weight: 500;
+        }
+        
+        .no-history {
+            text-align: center;
+            padding: 30px;
+            color: rgba(255, 255, 255, 0.7);
+            font-style: italic;
+        }
+        
+        .logs-section {
+            margin-top: 2rem;
+        }
+        
+        .logs-container {
+            max-height: 400px;
+            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 10px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .log-entry {
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            animation: fadeIn 0.5s;
+        }
+        
+        .log-timestamp {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+        
+        .log-action {
+            font-weight: 500;
+        }
+        
+        .log-edit {
+            border-left: 4px solid rgba(58, 134, 255, 0.7);
+        }
+        
+        .log-delete {
+            border-left: 4px solid #fc1e05;
+        }
+        
+        .log-restore {
+            border-left: 4px solid rgba(35, 100, 7, 0.842);
+        }
+        
+        .log-archive {
+            border-left: 4px solid rgba(116, 30, 230, 0.89);
+        }
+        
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+        
+        .btn-import {
+            background-color: rgba(106, 176, 76, 0.8);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-import:hover {
+            background-color: rgba(77, 129, 54, 0.8);
+            transform: translateY(-2px);
+        }
+
+        .modal-icon {
+    width: 60px;
+    height: 60px;
+    display: block;
+    margin: 0 auto 15px auto;
+}
+.delete-warning {
+    display: block;
+    margin-top: 8px;
+    font-weight: bold;
+    color: #ff4d4d;
+}
+/* Glassmorphism Checkbox */
+.glass-checkbox {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.glass-checkbox input {
+    display: none; /* Hide default checkbox */
+}
+
+.glass-checkbox .checkmark {
+    width: 20px;
+    height: 20px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(6px);
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.glass-checkbox .checkmark::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 6px;
+    height: 12px;
+    border: solid rgba(255, 255, 255, 0.9);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg) scale(0);
+    transition: transform 0.3s ease;
+    opacity: 0;
+}
+
+/* When checked */
+.glass-checkbox input:checked + .checkmark {
+    background: rgba(0, 191, 255, 0.2);
+    border-color: rgba(0, 191, 255, 0.6);
+    box-shadow: 0 4px 12px rgba(0,191,255,0.4);
+}
+
+.glass-checkbox input:checked + .checkmark::after {
+    transform: rotate(45deg) scale(1);
+    opacity: 1;
+}
+
+/* Hover effect */
+.glass-checkbox:hover .checkmark {
+    border-color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Flash Messages -->
+        <div class="flash-container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="flash-message alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        <div class="header-container">
+            <a href="/employee-list" class="btn-back">
+                ← Kembali
+            </a>
+            
+            <h2>Arsip Karyawan</h2>
+        </div>
+        
+        <!-- Search and Pagination Controls -->
+<div class="controls-container">
+    <div class="search-container">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" id="searchInput" class="search-input" placeholder="Cari nama karyawan..." oninput="filterEmployees()">
+    </div>
+
+    <div class="selection-controls">
+        <button class="btn btn-select" id="toggleSelectBtn" onclick="toggleSelectionMode()">Pilih</button>
+        <button class="btn btn-delete" id="deleteSelectedBtn" style="display: none;" onclick="confirmDeleteSelected()">Hapus Pilihan</button>
+    </div>
+
+    <div class="pagination">
+        <select id="pageSizeSelect" class="page-size-select" onchange="changePageSize()">
+            <option value="5">5 per halaman</option>
+            <option value="10" selected>10 per halaman</option>
+            <option value="20">20 per halaman</option>
+            <option value="50">50 per halaman</option>
+        </select>
+        
+        <button class="pagination-button" id="prevPage" onclick="changePage(currentPage - 1)" disabled>
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        
+        <span class="pagination-info" id="pageInfo">Halaman 1 dari 1</span>
+        
+        <button class="pagination-button" id="nextPage" onclick="changePage(currentPage + 1)" disabled>
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <div id="bulkDeleteModal" class="modal">
+    <div class="modal-content">
+        <h3 class="modal-title">Konfirmasi Penghapusan Massal</h3>
+        <p id="bulkDeleteMessage">Apakah Anda yakin ingin menghapus karyawan yang dipilih secara permanen?</p>
+        <div class="modal-actions">
+            <button type="button" class="btn btn-cancel" onclick="closeBulkDeleteModal()">Batal</button>
+            <button type="button" class="btn btn-delete" id="confirmBulkDeleteBtn">Hapus Semua</button>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Selection Controls -->
+</div>
+
+<table id="employeesTable">
+    <thead>
+        <tr>
+            <th class="select-col" style="display:none;">
+                <label class="glass-checkbox">
+                    <input type="checkbox" id="selectAll" onclick="toggleSelectAll(this)">
+                    <span class="checkmark"></span>
+                </label>
+            </th>
+            <th>Reference ID</th>
+            <th>Nama</th>
+            <th>Tanggal Diarsipkan</th>
+            <th>Jam</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody id="employeesTableBody">
+        {% for emp in employees %}
+        <tr data-id="{{ emp.ref_id }}" data-name="{{ emp.name|lower }}">
+            <td class="select-col" style="display:none;">
+                <label class="glass-checkbox">
+                    <input type="checkbox" class="row-checkbox" value="{{ emp.ref_id }}">
+                    <span class="checkmark"></span>
+                </label>
+            </td>
+            <td>{{ emp.ref_id }}</td>
+            <td>{{ emp.name }}</td>
+            <td>
+                {% if emp.archived_date_jakarta %}
+                    {{ emp.archived_date_jakarta|indo_day_date }}
+                {% else %}
+                    Tanggal tidak tersedia
+                {% endif %}
+            </td>
+            <td>
+                {% if emp.archived_date_jakarta %}
+                    {{ emp.archived_date_jakarta.strftime('%H:%M') }}
+                {% else %}
+                    -
+                {% endif %}
+            </td>
+            <td>
+                <div class="action-buttons">
+                    <button class="btn btn-restore" onclick="confirmRestore('{{ emp.ref_id }}', '{{ emp.name }}')">
+                        <i class="fas fa-undo"></i>
+                    </button>
+                    <button class="btn btn-delete" onclick="confirmDelete('{{ emp.ref_id }}', '{{ emp.name }}')">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+        
+        <div id="noResults" class="no-results" style="display: none;">
+            Tidak ada karyawan yang diarsipkan.
+        </div>
+
+        <!-- Restore Confirmation Modal -->
+        <div id="restoreModal" class="modal">
+            <div class="modal-content">
+                <h3 class="modal-title">Konfirmasi Pemulihan</h3>
+                <p id="restoreMessage">Apakah Anda yakin ingin memulihkan karyawan ini?</p>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-cancel" onclick="closeModal()">Batal</button>
+                    <button type="button" class="btn btn-restore" id="confirmRestoreBtn">Pulihkan</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Delete Confirmation Modal -->
+        <div id="deleteModal" class="modal">
+            <div class="modal-content">
+                <img src="{{ url_for('static', filename='warning_sound.png') }}" 
+                    alt="Warning" 
+                    class="modal-icon">
+
+                <h3 class="modal-title">Konfirmasi Penghapusan Permanen</h3>
+                <p id="deleteMessage">
+                    Apakah Anda yakin ingin menghapus karyawan ini secara permanen? 
+                    Tindakan ini tidak dapat dibatalkan!
+                </p>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-cancel" onclick="closeDeleteModal()">Batal</button>
+                    <button type="button" class="btn btn-delete" id="confirmDeleteBtn">Hapus Permanen</button>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Activity Logs Section -->
+        <div class="logs-section" style="margin-top: 2rem;">
+            <h3 style="color: white; display: flex; justify-content: space-between; align-items: center;">
+                Log Aktivitas Arsip
+                <button class="btn btn-add" onclick="refreshLogs()" style="font-size: 12px; padding: 5px 10px;">
+                    <i class="fas fa-sync-alt"></i> Refresh
+                </button>
+            </h3>
+            <div class="logs-container">
+                <div id="activityLogs">
+                    <p style="text-align: center; color: rgba(255, 255, 255, 0.7);">Memuat log aktivitas...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        let pageSize = 10;
+        let allEmployees = [];
+        let filteredEmployees = [];
+        let employeeToRestore = null;
+        let employeeToDelete = null;
+
+        function initPagination() {
+            const rows = document.querySelectorAll('#employeesTableBody tr');
+            allEmployees = Array.from(rows);
+
+            allEmployees.forEach(row => {
+                const nameCell = row.cells[1];
+                row.dataset.name = nameCell.textContent.toLowerCase();
+            });
+
+            filteredEmployees = [...allEmployees];
+            pageSize = parseInt(document.getElementById('pageSizeSelect').value);
+            currentPage = 1;
+            updatePagination();
+        }
+
+        function filterEmployees() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+
+            if (searchTerm === '') {
+                filteredEmployees = [...allEmployees];
+            } else {
+                filteredEmployees = allEmployees.filter(row => row.dataset.name.includes(searchTerm));
+            }
+
+            currentPage = 1;
+            updatePagination();
+        }
+
+        function changePageSize() {
+            pageSize = parseInt(document.getElementById('pageSizeSelect').value);
+            currentPage = 1;
+            updatePagination();
+        }
+
+        function changePage(page) {
+            if (page < 1 || page > Math.ceil(filteredEmployees.length / pageSize)) return;
+            currentPage = page;
+            updatePagination();
+        }
+
+        function updatePagination() {
+            const totalPages = Math.ceil(filteredEmployees.length / pageSize);
+            const startIndex = (currentPage - 1) * pageSize;
+            const endIndex = Math.min(startIndex + pageSize, filteredEmployees.length);
+
+            document.getElementById('pageInfo').textContent = `Halaman ${currentPage} dari ${totalPages || 1}`;
+            document.getElementById('prevPage').disabled = currentPage === 1;
+            document.getElementById('nextPage').disabled = currentPage === totalPages || totalPages === 0;
+
+            allEmployees.forEach(row => row.style.display = 'none');
+            for (let i = startIndex; i < endIndex; i++) {
+                if (filteredEmployees[i]) {
+                    filteredEmployees[i].style.display = '';
+                }
+            }
+
+            document.getElementById('noResults').style.display = filteredEmployees.length === 0 ? 'block' : 'none';
+        }
+
+        function confirmRestore(refId, name) {
+            employeeToRestore = refId;
+            document.getElementById('restoreMessage').innerHTML =
+                `Apakah Anda yakin ingin memulihkan karyawan <b>${name}</b>?`;
+            document.getElementById('restoreModal').style.display = 'flex';
+        }
+
+        function confirmDelete(refId, name) {
+            employeeToDelete = refId;
+            document.getElementById('deleteMessage').innerHTML =
+                `Apakah Anda yakin ingin menghapus karyawan <b>${name}</b> secara permanen?<br><br><span class="delete-warning">Tindakan ini tidak dapat dibatalkan!</span>`;
+            document.getElementById('deleteModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('restoreModal').style.display = 'none';
+            employeeToRestore = null;
+        }
+
+        function closeDeleteModal() {
+            document.getElementById('deleteModal').style.display = 'none';
+            employeeToDelete = null;
+        }
+
+        // Handle restore confirmation
+        document.getElementById('confirmRestoreBtn').addEventListener('click', async function() {
+            if (employeeToRestore) {
+                try {
+                    const response = await fetch(`/employees/${employeeToRestore}/restore`, {
+                        method: "POST"
+                    });
+
+                    const result = await response.json();
+                    
+                    if (response.ok) {
+                        const row = document.querySelector(`tr[data-id="${employeeToRestore}"]`);
+                        if (row) {
+                            row.remove();
+                        }
+                        closeModal();
+                        alert("Karyawan berhasil dipulihkan!");
+                        initPagination();
+                    } else {
+                        alert(`Gagal memulihkan karyawan: ${result.error}`);
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert("Terjadi kesalahan saat memulihkan karyawan.");
+                }
+            }
+        });
+
+        // Handle delete confirmation
+        // Handle delete confirmation
+        document.getElementById('confirmDeleteBtn').addEventListener('click', async function() {
+            if (employeeToDelete) {
+                try {
+                    const response = await fetch(`/employees/${employeeToDelete}/permanent-delete`, {
+                        method: "POST"
+                    });
+
+                    const result = await response.json();
+                    
+                    if (response.ok) {
+                        const row = document.querySelector(`tr[data-id="${employeeToDelete}"]`);
+                        if (row) {
+                            row.remove();
+                        }
+                        closeDeleteModal();
+                        alert("Karyawan berhasil dihapus permanen!");
+                        initPagination();
+                    } else {
+                        // Show more detailed error message from server
+                        alert(`Gagal menghapus karyawan: ${result.error || result.message || 'Error tidak diketahui'}`);
+                        
+                        // Check if it's the specific constraint violation error
+                        if (result.error && result.error.includes('ret_id') && result.error.includes('null')) {
+                            console.error('Database constraint violation: ret_id cannot be null');
+                            // You might want to show a more specific message to the user
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert("Terjadi kesalahan saat menghapus karyawan.");
+                }
+            }
+        });
+
+        // Load logs function
+        async function loadLogs() {
+            try {
+                const response = await fetch('/activity-logs');
+                const logs = await response.json();
+                
+                const logsContainer = document.getElementById('activityLogs');
+                logsContainer.innerHTML = '';
+                
+                if (logs.length === 0) {
+                    logsContainer.innerHTML = '<p style="text-align: center; color: rgba(255, 255, 255, 0.7);">Tidak ada aktivitas arsip terbaru</p>';
+                    return;
+                }
+                
+                // Filter for archive and restore activities
+                const archiveLogs = logs.filter(log => 
+                    log.action === 'archive_employee' || log.action === 'restore_employee' || 
+                    log.action === 'delete_employee' || log.action === 'permanent_delete_employee'
+                );
+                                
+                if (archiveLogs.length === 0) {
+                    logsContainer.innerHTML = '<p style="text-align: center; color: rgba(255, 255, 255, 0.7);">Tidak ada aktivitas arsip terbaru</p>';
+                    return;
+                }
+                
+                archiveLogs.forEach(log => {
+                    const logEntry = document.createElement('div');
+                    logEntry.className = `log-entry log-${log.action.includes('archive') ? 'archive' : 
+                                         log.action.includes('restore') ? 'restore' : 'delete'}`;
+                    
+                    // Parse the timestamp
+                    const logDate = new Date(log.timestamp);
+                    
+                    // Get the timezone offset between UTC and local time (in minutes)
+                    const timezoneOffset = logDate.getTimezoneOffset();
+                    
+                    // Adjust the date by the timezone offset to get correct local time
+                    const localDate = new Date(logDate.getTime() - (timezoneOffset * 60000));
+                    
+                    // Indonesian month names
+                    const indonesianMonths = [
+                        'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+                        'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+                    ];
+                    
+                    const day = localDate.getDate();
+                    const month = indonesianMonths[localDate.getMonth()];
+                    const year = localDate.getFullYear();
+                    const hours = localDate.getHours().toString().padStart(2, '0');
+                    const minutes = localDate.getMinutes().toString().padStart(2, '0');
+                    
+                    const formattedDateTime = `${day} ${month} ${year} ${hours}:${minutes}`;
+                    
+                    // Create message based on action type
+                    let actionText = '';
+
+                    // Helper: format employee as "Name (ref_id)"
+                    function formatEmployee(details, refId) {
+                        if (details && details.name) {
+                            return `${details.name} (${refId})`;
+                        }
+                        return `(${refId})`; // fallback if no name
+                    }
+
+                    if (log.action === 'archive_employee') {
+                        actionText = `<span>${log.user_id} menghapus karyawan: ${formatEmployee(log.details, log.target_employee)} dan memindahkan ke arsip.</span>`;
+                    } else if (log.action === 'restore_employee') {
+                        actionText = `<span>${log.user_id} memulihkan karyawan: ${formatEmployee(log.details, log.target_employee)}</span>`;
+                    } else if (log.action === 'permanent_delete_employee') {
+                        actionText = `<span>${log.user_id} menghapus permanen karyawan: ${formatEmployee(log.details, log.target_employee)}</span>`;
+                    } else {
+                        actionText = `<span>${log.user_id} melakukan ${log.action} pada ${formatEmployee(log.details, log.target_employee)}</span>`;
+                    }
+
+                    logEntry.innerHTML = `
+                        <div class="log-timestamp">${formattedDateTime}</div>
+                        <div>${actionText}</div>
+                    `;
+
+                    logsContainer.appendChild(logEntry);
+
+                });
+            } catch (error) {
+                console.error('Error loading logs:', error);
+                document.getElementById('activityLogs').innerHTML = 
+                    '<p style="text-align: center; color: rgba(255, 71, 87, 0.7);">Gagal memuat log aktivitas</p>';
+            }
+        }
+
+        function refreshLogs() {
+            loadLogs();
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initPagination();
+            loadLogs();
+        });
+
+        // Close modals when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target.classList.contains('modal')) {
+                closeModal();
+                closeDeleteModal();
+            }
+        });
+        let selectionMode = false;
+
+function toggleSelectionMode() {
+    selectionMode = !selectionMode;
+    const selectCols = document.querySelectorAll('.select-col');
+    const deleteSelectedBtn = document.getElementById('deleteSelectedBtn');
+    const toggleBtn = document.getElementById('toggleSelectBtn');
+
+    selectCols.forEach(col => {
+        col.style.display = selectionMode ? '' : 'none';
+    });
+
+    deleteSelectedBtn.style.display = selectionMode ? 'inline-block' : 'none';
+    toggleBtn.textContent = selectionMode ? 'Batal' : 'Pilih';
+
+    if (!selectionMode) {
+        document.querySelectorAll('.row-checkbox').forEach(cb => cb.checked = false);
+        document.getElementById('selectAll').checked = false;
+    }
+}
+
+function toggleSelectAll(source) {
+    document.querySelectorAll('.row-checkbox').forEach(cb => cb.checked = source.checked);
+}
+
+function confirmDeleteSelected() {
+    const selected = Array.from(document.querySelectorAll('.row-checkbox:checked'))
+                          .map(cb => cb.value);
+
+    if (selected.length === 0) {
+        alert("Pilih minimal satu karyawan untuk dihapus!");
+        return;
+    }
+
+    if (confirm(`Apakah Anda yakin ingin menghapus ${selected.length} karyawan secara permanen?`)) {
+        selected.forEach(refId => {
+            fetch(`/employees/${refId}/permanent-delete`, {
+                method: "POST"
+            })
+            .then(res => res.json())
+            .then(result => {
+                if (res.ok) {
+                    const row = document.querySelector(`tr[data-id="${refId}"]`);
+                    if (row) row.remove();
+                } else {
+                    console.error(`Gagal hapus ${refId}:`, result.error);
+                }
+            })
+            .catch(err => console.error("Error:", err));
+        });
+
+        alert(`${selected.length} karyawan berhasil dihapus permanen!`);
+        initPagination();
+    }
+}
+
+    </script>
+</body>
+</html>

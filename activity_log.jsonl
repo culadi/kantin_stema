@@ -1,0 +1,292 @@
+{"timestamp": "2025-08-26T04:56:05.044664", "user_id": "admin", "action": "edit_employee", "target_employee": "0011528554", "details": {"old_ref_id": "0011528554", "new_ref_id": "0011528554", "new_name": "Rafael Daniel Culadi12"}}
+{"timestamp": "2025-08-26T04:56:15.226375", "user_id": "admin", "action": "edit_employee", "target_employee": "0011528554", "details": {"old_ref_id": "0011528554", "new_ref_id": "0011528554", "new_name": "Rafael Daniel Culadi"}}
+{"timestamp": "2025-08-26T05:04:50.772117", "user_id": "admin", "action": "edit_employee", "target_employee": "0003700096", "details": {"old_ref_id": "0003700096", "new_ref_id": "0003700096", "new_name": "Raymond Brian Thenesius12"}}
+{"timestamp": "2025-08-26T05:05:10.678414", "user_id": "admin", "action": "edit_employee", "target_employee": "0003700096", "details": {"old_ref_id": "0003700096", "new_ref_id": "0003700096", "new_name": "Raymond Brian Thenesius"}}
+{"timestamp": "2025-08-26T05:07:57.466654", "user_id": "admin", "action": "delete_employee", "target_employee": "12", "details": {}}
+{"timestamp": "2025-08-26T05:08:02.953887", "user_id": "admin", "action": "edit_employee", "target_employee": "0003700096", "details": {"old_ref_id": "0003700096", "new_ref_id": "0003700096", "new_name": "Raymond Brian Thenesius12"}}
+{"timestamp": "2025-08-26T05:08:13.736538", "user_id": "admin", "action": "edit_employee", "target_employee": "0003700096", "details": {"old_ref_id": "0003700096", "new_ref_id": "0003700096", "new_name": "Raymond Brian Thenesius"}}
+{"timestamp": "2025-08-26T05:11:14.421467", "user_id": "admin", "action": "edit_employee", "target_employee": "0003700096", "details": {"old_ref_id": "0003700096", "new_ref_id": "0003700096", "new_name": "Raymond Brian Thenesius255"}}
+{"timestamp": "2025-08-26T05:11:24.762518", "user_id": "admin", "action": "edit_employee", "target_employee": "0003700096", "details": {"old_ref_id": "0003700096", "new_ref_id": "0003700096", "new_name": "Raymond Brian Thenesius"}}
+{"timestamp": "2025-08-26T05:14:16.613212", "user_id": "172.17.0.53", "action": "add_employee", "target_employee": "15", "details": {"name": "15"}}
+{"timestamp": "2025-08-26T05:14:26.159622", "user_id": "admin", "action": "delete_employee", "target_employee": "15", "details": {}}
+{"timestamp": "2025-08-26T05:15:52.332566", "user_id": "admin", "action": "add_employee", "target_employee": "48484884", "details": {"name": "Admin"}}
+{"timestamp": "2025-08-26T05:16:05.766908", "user_id": "admin", "action": "delete_employee", "target_employee": "48484884", "details": {}}
+{"timestamp": "2025-08-26T05:16:33.022956", "user_id": "admin", "action": "edit_employee", "target_employee": "0003700096", "details": {"old_ref_id": "0003700096", "new_ref_id": "000370009625", "new_name": "Raymond Brian Thenesius"}}
+{"timestamp": "2025-08-26T05:16:46.532354", "user_id": "admin", "action": "edit_employee", "target_employee": "000370009625", "details": {"old_ref_id": "000370009625", "new_ref_id": "0003700096", "new_name": "Raymond Brian Thenesius"}}
+{"timestamp": "2025-08-26T05:20:44.004986", "user_id": "admin", "action": "edit_employee", "target_employee": "0011528554", "details": {"old_ref_id": "0011528554", "new_ref_id": "0011528554", "new_name": "Rafael Daniel Culadi12"}}
+{"timestamp": "2025-08-26T05:20:51.097312", "user_id": "admin", "action": "edit_employee", "target_employee": "0011528554", "details": {"old_ref_id": "0011528554", "new_ref_id": "0011528554", "new_name": "Rafael Daniel Culadi"}}
+{"timestamp": "2025-08-26T05:23:12.895569", "user_id": "admin", "action": "edit_employee", "target_employee": "0003700096", "details": {"old_ref_id": "0003700096", "new_ref_id": "0003700096", "new_name": "Raymond Brian Thenesiuss"}}
+{"timestamp": "2025-08-26T05:23:44.989362", "user_id": "admin", "action": "add_employee", "target_employee": "4tet", "details": {"name": "djsoda"}}
+{"timestamp": "2025-08-26T05:23:55.071172", "user_id": "admin", "action": "delete_employee", "target_employee": "4tet", "details": {}}
+{"timestamp": "2025-08-26T06:02:06.009816", "user_id": "admin", "action": "edit_employee", "target_employee": "0003700096", "details": {"old_ref_id": "0003700096", "new_ref_id": "0003700096", "new_name": "Raymond Brian Thenesius"}}
+{"timestamp": "2025-08-26T06:17:12.134782", "user_id": "admin", "action": "edit_employee", "target_employee": "0003700096", "details": {"old_ref_id": "0003700096", "new_ref_id": "0003700096", "new_name": "Raymond Brian Thenesius12"}}
+{"timestamp": "2025-08-26T06:17:20.945312", "user_id": "admin", "action": "add_employee", "target_employee": "15", "details": {"name": "15"}}
+{"timestamp": "2025-08-26T06:17:25.408754", "user_id": "admin", "action": "delete_employee", "target_employee": "15", "details": {}}
+{"timestamp": "2025-08-26T06:17:33.355097", "user_id": "admin", "action": "edit_employee", "target_employee": "0003700096", "details": {"old_ref_id": "0003700096", "new_ref_id": "0003700096", "new_name": "Raymond Brian Thenesius"}}
+{"timestamp": "2025-08-26T06:17:44.972404", "user_id": "admin", "action": "add_employee", "target_employee": "16161", "details": {"name": "161616"}}
+{"timestamp": "2025-08-26T06:17:48.418878", "user_id": "admin", "action": "delete_employee", "target_employee": "16161", "details": {}}
+{"timestamp": "2025-08-26T07:57:37.144421", "user_id": "admin", "action": "edit_employee", "target_employee": "0003700096", "details": {"old_ref_id": "0003700096", "new_ref_id": "0003700096", "new_name": "Raymond Brian Thenesius"}}
+{"timestamp": "2025-08-26T07:57:54.576050", "user_id": "admin", "action": "edit_employee", "target_employee": "0003700096", "details": {"old_ref_id": "0003700096", "new_ref_id": "0003700096", "new_name": "Raymond"}}
+{"timestamp": "2025-08-26T07:58:14.952889", "user_id": "admin", "action": "edit_employee", "target_employee": "0003700096", "details": {"old_ref_id": "0003700096", "new_ref_id": "0003700096", "new_name": "Raymond Brian Thenesius"}}
+{"timestamp": "2025-08-27T00:22:13.743202", "user_id": "admin", "action": "add_employee", "target_employee": "2626161271", "details": {"name": "Reza Palava"}}
+{"timestamp": "2025-08-27T02:11:15.978792", "user_id": "admin", "action": "edit_employee", "target_employee": "2626161271", "details": {"old_ref_id": "2626161271", "new_ref_id": "2626161271", "new_name": "Reza Palava12"}}
+{"timestamp": "2025-08-27T02:11:23.498909", "user_id": "admin", "action": "edit_employee", "target_employee": "2626161271", "details": {"old_ref_id": "2626161271", "new_ref_id": "2626161271", "new_name": "Reza Palava"}}
+{"timestamp": "2025-08-27T02:16:10.468876", "user_id": "admin", "action": "edit_employee", "target_employee": "2626161271", "details": {"old_ref_id": "2626161271", "new_ref_id": "2626161271", "new_name": "Reza Palava12"}}
+{"timestamp": "2025-08-27T02:16:18.225975", "user_id": "admin", "action": "edit_employee", "target_employee": "2626161271", "details": {"old_ref_id": "2626161271", "new_ref_id": "2626161271", "new_name": "Reza Palava"}}
+{"timestamp": "2025-08-27T02:17:05.807334", "user_id": "admin", "action": "edit_employee", "target_employee": "0011528554", "details": {"old_ref_id": "0011528554", "new_ref_id": "0011528554", "new_name": "Rafael Daniel Culadi12"}}
+{"timestamp": "2025-08-27T02:17:11.768181", "user_id": "admin", "action": "edit_employee", "target_employee": "0011528554", "details": {"old_ref_id": "0011528554", "new_ref_id": "0011528554", "new_name": "Rafael Daniel Culadi"}}
+{"timestamp": "2025-08-27T02:17:57.677741", "user_id": "admin", "action": "edit_employee", "target_employee": "2626161271", "details": {"old_ref_id": "2626161271", "new_ref_id": "2626161271", "new_name": "Reza Pahlava"}}
+{"timestamp": "2025-08-27T02:24:12.000106", "username": "unknown", "action": "edit_employee", "target_employee": "2626161271", "details": {"old_ref_id": "2626161271", "new_ref_id": "2626161271", "new_name": "Reza Pahlava12"}}
+{"timestamp": "2025-08-27T02:24:21.311767", "username": "unknown", "action": "edit_employee", "target_employee": "2626161271", "details": {"old_ref_id": "2626161271", "new_ref_id": "2626161271", "new_name": "Reza Pahlava"}}
+{"timestamp": "2025-08-27T02:24:34.030328", "username": "unknown", "action": "edit_employee", "target_employee": "2626161271", "details": {"old_ref_id": "2626161271", "new_ref_id": "2626161271", "new_name": "Reza Pahlava12"}}
+{"timestamp": "2025-08-27T02:25:09.716938", "user_id": "admin", "action": "edit_employee", "target_employee": "2626161271", "details": {"old_ref_id": "2626161271", "new_ref_id": "2626161271", "new_name": "Reza Pahlava"}}
+{"timestamp": "2025-08-27T02:25:26.459192", "user_id": "admin", "action": "edit_employee", "target_employee": "0011528554", "details": {"old_ref_id": "0011528554", "new_ref_id": "0011528554", "new_name": "Rafael Daniel Culadi12"}}
+{"timestamp": "2025-08-27T02:25:32.202066", "user_id": "admin", "action": "edit_employee", "target_employee": "0011528554", "details": {"old_ref_id": "0011528554", "new_ref_id": "0011528554", "new_name": "Rafael Daniel Culadi"}}
+{"timestamp": "2025-08-27T02:54:00.737122", "user_id": "admin", "action": "add_employee", "target_employee": "912717271", "details": {"name": "Rendy Adrianto"}}
+{"timestamp": "2025-08-27T03:23:51.497290", "user_id": "admin", "action": "add_employee", "target_employee": "15", "details": {"name": "15"}}
+{"timestamp": "2025-08-27T03:23:54.593092", "user_id": "admin", "action": "add_employee", "target_employee": "162", "details": {"name": "26626"}}
+{"timestamp": "2025-08-27T03:23:57.773942", "user_id": "admin", "action": "add_employee", "target_employee": "126126", "details": {"name": "126126"}}
+{"timestamp": "2025-08-27T03:24:06.298724", "user_id": "admin", "action": "add_employee", "target_employee": "8718181", "details": {"name": "1818181"}}
+{"timestamp": "2025-08-27T03:24:10.983815", "user_id": "admin", "action": "add_employee", "target_employee": "81898191", "details": {"name": "18181818"}}
+{"timestamp": "2025-08-27T03:24:22.732537", "user_id": "admin", "action": "add_employee", "target_employee": "89000000", "details": {"name": "070707"}}
+{"timestamp": "2025-08-27T03:25:41.599732", "user_id": "admin", "action": "delete_employee", "target_employee": "8718181", "details": {}}
+{"timestamp": "2025-08-27T03:25:44.940882", "user_id": "admin", "action": "delete_employee", "target_employee": "126126", "details": {}}
+{"timestamp": "2025-08-27T03:25:48.907880", "user_id": "admin", "action": "delete_employee", "target_employee": "162", "details": {}}
+{"timestamp": "2025-08-27T03:25:52.244330", "user_id": "admin", "action": "delete_employee", "target_employee": "15", "details": {}}
+{"timestamp": "2025-08-28T05:01:38.357808", "user_id": "admin", "action": "edit_employee", "target_employee": "912717271", "details": {"old_ref_id": "912717271", "new_ref_id": "912717271", "new_name": "Rendy Adrianti"}}
+{"timestamp": "2025-08-28T05:02:01.298834", "user_id": "admin", "action": "edit_employee", "target_employee": "912717271", "details": {"old_ref_id": "912717271", "new_ref_id": "912717271", "new_name": "Rendy Adrianto"}}
+{"timestamp": "2025-08-28T05:07:30.270893", "user_id": "admin", "action": "add_employee", "target_employee": "87801231", "details": {"name": "Pierre Senjaya"}}
+{"timestamp": "2025-08-28T07:08:08.260537", "user_id": "admin", "action": "add_employee", "target_employee": "000545488787", "details": {"name": "Mitchel Senjaya"}}
+{"timestamp": "2025-08-29T02:48:32.787643", "user_id": "admin", "action": "edit_employee", "target_employee": "000545488787", "details": {"old_ref_id": "000545488787", "new_ref_id": "000545488787", "new_name": "Mitchel Senjaya12"}}
+{"timestamp": "2025-08-29T02:48:39.039249", "user_id": "admin", "action": "edit_employee", "target_employee": "000545488787", "details": {"old_ref_id": "000545488787", "new_ref_id": "000545488787", "new_name": "Mitchel Senjaya"}}
+{"timestamp": "2025-09-01T04:41:04.789308", "user_id": "admin", "action": "add_employee", "target_employee": "255", "details": {"name": "test"}}
+{"timestamp": "2025-09-01T04:52:43.225872", "user_id": "admin", "action": "delete_employee", "target_employee": "255", "details": {}}
+{"timestamp": "2025-09-01T06:03:08.976080", "user_id": "admin", "action": "add_employee", "target_employee": "000627121", "details": {"name": "Yoseph Nugroho"}}
+{"timestamp": "2025-09-01T06:19:02.212762", "user_id": "admin", "action": "add_employee", "target_employee": "tet", "details": {"name": "test"}}
+{"timestamp": "2025-09-01T06:19:36.518970", "user_id": "admin", "action": "delete_employee", "target_employee": "tet", "details": {}}
+{"timestamp": "2025-09-01T06:35:33.345408", "user_id": "admin", "action": "add_employee", "target_employee": "007171717", "details": {"name": "Kezia Damanik"}}
+{"timestamp": "2025-09-01T08:58:23.463224", "user_id": "admin", "action": "edit_employee", "target_employee": "007171717", "details": {"old_ref_id": "007171717", "new_ref_id": "007171717", "new_name": "Kezia Damanikk"}}
+{"timestamp": "2025-09-01T08:58:30.988165", "user_id": "admin", "action": "edit_employee", "target_employee": "007171717", "details": {"old_ref_id": "007171717", "new_ref_id": "007171717", "new_name": "Kezia Damanik"}}
+{"timestamp": "2025-09-01T09:16:44.292774", "user_id": "admin", "action": "edit_employee", "target_employee": "007171717", "details": {"old_ref_id": "007171717", "new_ref_id": "007171717", "new_name": "Kezia Damanik12"}}
+{"timestamp": "2025-09-01T09:16:58.034450", "user_id": "admin", "action": "edit_employee", "target_employee": "007171717", "details": {"old_ref_id": "007171717", "new_ref_id": "007171717", "new_name": "Kezia Damanik"}}
+{"timestamp": "2025-09-01T09:17:55.570487", "user_id": "admin", "action": "edit_employee", "target_employee": "000627121", "details": {"old_ref_id": "000627121", "new_ref_id": "000627121", "new_name": "Yoseph Nugroho12"}}
+{"timestamp": "2025-09-01T09:18:01.812812", "user_id": "admin", "action": "edit_employee", "target_employee": "000627121", "details": {"old_ref_id": "000627121", "new_ref_id": "000627121", "new_name": "Yoseph Nugroho"}}
+{"timestamp": "2025-09-02T00:08:00.539144", "user_id": "admin", "action": "edit_employee", "target_employee": "000627121", "details": {"old_ref_id": "000627121", "new_ref_id": "000627121", "new_name": "Yoseph Nugroho12"}}
+{"timestamp": "2025-09-02T00:08:06.630347", "user_id": "admin", "action": "edit_employee", "target_employee": "000627121", "details": {"old_ref_id": "000627121", "new_ref_id": "000627121", "new_name": "Yoseph Nugroho"}}
+{"timestamp": "2025-09-02T00:19:49.830718", "user_id": "admin", "action": "edit_employee", "target_employee": "000627121", "details": {"old_ref_id": "000627121", "new_ref_id": "000627121", "new_name": "Yoseph Nugroho12"}}
+{"timestamp": "2025-09-02T00:19:54.955542", "user_id": "admin", "action": "edit_employee", "target_employee": "000627121", "details": {"old_ref_id": "000627121", "new_ref_id": "000627121", "new_name": "Yoseph Nugroho"}}
+{"timestamp": "2025-09-02T00:26:49.166410", "user_id": "admin", "action": "edit_employee", "target_employee": "000627121", "details": {"old_ref_id": "000627121", "new_ref_id": "000627121", "new_name": "Yoseph Nugroho12"}}
+{"timestamp": "2025-09-02T00:26:57.369927", "user_id": "admin", "action": "edit_employee", "target_employee": "000627121", "details": {"old_ref_id": "000627121", "new_ref_id": "000627121", "new_name": "Yoseph Nugroho"}}
+{"timestamp": "2025-09-02T00:37:04.807950", "user_id": "handrow", "action": "edit_employee", "target_employee": "000627121", "details": {"old_ref_id": "000627121", "new_ref_id": "000627121", "new_name": "Yoseph Nugroho12"}}
+{"timestamp": "2025-09-02T00:37:12.785017", "user_id": "handrow", "action": "edit_employee", "target_employee": "000627121", "details": {"old_ref_id": "000627121", "new_ref_id": "000627121", "new_name": "Yoseph Nugroho"}}
+{"timestamp": "2025-09-02T00:38:21.470450", "user_id": "anin", "action": "edit_employee", "target_employee": "007171717", "details": {"old_ref_id": "007171717", "new_ref_id": "007171717", "new_name": "Kezia Damanik225"}}
+{"timestamp": "2025-09-02T00:38:46.340706", "user_id": "handrow", "action": "edit_employee", "target_employee": "007171717", "details": {"old_ref_id": "007171717", "new_ref_id": "007171717", "new_name": "Kezia Damanik"}}
+{"timestamp": "2025-09-02T00:40:05.212017", "user_id": "david", "action": "add_employee", "target_employee": "26262626262", "details": {"name": "David Lidian"}}
+{"timestamp": "2025-09-02T00:41:00.234377", "user_id": "david", "action": "add_employee", "target_employee": "26262626", "details": {"name": "testtt"}}
+{"timestamp": "2025-09-02T01:27:17.831774", "user_id": "handrow", "action": "delete_employee", "target_employee": "26262626", "details": {}}
+{"timestamp": "2025-09-02T02:08:01.545482", "user_id": "oda", "action": "edit_employee", "target_employee": "007171717", "details": {"old_ref_id": "007171717", "new_ref_id": "007171717", "new_name": "Kezia Damanik12"}}
+{"timestamp": "2025-09-02T02:15:33.647953", "user_id": "oda", "action": "edit_employee", "target_employee": "007171717", "details": {"old_ref_id": "007171717", "new_ref_id": "007171717", "new_name": "Kezia Damanik"}}
+{"timestamp": "2025-09-02T03:21:46.294836", "user_id": "oda", "action": "edit_employee", "target_employee": "26262626262", "details": {"old_ref_id": "26262626262", "new_ref_id": "26262626262", "new_name": "David Lidian12"}}
+{"timestamp": "2025-09-02T03:21:51.606087", "user_id": "oda", "action": "edit_employee", "target_employee": "26262626262", "details": {"old_ref_id": "26262626262", "new_ref_id": "26262626262", "new_name": "David Lidian"}}
+{"timestamp": "2025-09-02T06:18:19.241720", "user_id": "oda", "action": "add_employee", "target_employee": "2525252", "details": {"name": "2626262"}}
+{"timestamp": "2025-09-02T06:18:27.744400", "user_id": "oda", "action": "delete_employee", "target_employee": "2525252", "details": {}}
+{"timestamp": "2025-09-02T06:21:51.305162", "user_id": "oda", "action": "add_employee", "target_employee": "262626", "details": {"name": "2626262"}}
+{"timestamp": "2025-09-02T06:21:55.432838", "user_id": "oda", "action": "add_employee", "target_employee": "71717171", "details": {"name": "171717171"}}
+{"timestamp": "2025-09-02T06:22:07.211925", "user_id": "oda", "action": "add_employee", "target_employee": "17171717", "details": {"name": "171717171"}}
+{"timestamp": "2025-09-02T06:22:15.845058", "user_id": "oda", "action": "delete_employee", "target_employee": "262626", "details": {}}
+{"timestamp": "2025-09-02T06:22:18.807046", "user_id": "oda", "action": "delete_employee", "target_employee": "71717171", "details": {}}
+{"timestamp": "2025-09-02T06:22:21.052666", "user_id": "oda", "action": "delete_employee", "target_employee": "17171717", "details": {}}
+{"timestamp": "2025-09-02T06:22:42.223712", "user_id": "oda", "action": "add_employee", "target_employee": "262626262", "details": {"name": "testtt"}}
+{"timestamp": "2025-09-02T06:22:47.730928", "user_id": "oda", "action": "add_employee", "target_employee": "2626262", "details": {"name": "tetstst"}}
+{"timestamp": "2025-09-02T06:22:59.676936", "user_id": "oda", "action": "delete_employee", "target_employee": "2626262", "details": {}}
+{"timestamp": "2025-09-02T06:23:02.396172", "user_id": "oda", "action": "delete_employee", "target_employee": "262626262", "details": {}}
+{"timestamp": "2025-09-02T06:23:08.613759", "user_id": "oda", "action": "add_employee", "target_employee": "267272727", "details": {"name": "testtt"}}
+{"timestamp": "2025-09-02T06:23:17.246934", "user_id": "oda", "action": "add_employee", "target_employee": "2727272", "details": {"name": "hahahahaha"}}
+{"timestamp": "2025-09-02T06:26:47.219418", "user_id": "oda", "action": "delete_employee", "target_employee": "267272727", "details": {}}
+{"timestamp": "2025-09-02T06:26:51.728157", "user_id": "oda", "action": "delete_employee", "target_employee": "2727272", "details": {}}
+{"timestamp": "2025-09-02T06:26:56.029012", "user_id": "oda", "action": "add_employee", "target_employee": "272727272", "details": {"name": "testtt"}}
+{"timestamp": "2025-09-02T06:27:04.134286", "user_id": "oda", "action": "delete_employee", "target_employee": "272727272", "details": {}}
+{"timestamp": "2025-09-02T06:27:44.114221", "user_id": "oda", "action": "add_employee", "target_employee": "098112322", "details": {"name": "Handrow"}}
+{"timestamp": "2025-09-02T06:27:52.138143", "user_id": "oda", "action": "add_employee", "target_employee": "0002251251", "details": {"name": "Abdul Halim"}}
+{"timestamp": "2025-09-02T06:28:23.679642", "user_id": "oda", "action": "add_employee", "target_employee": "001781812", "details": {"name": "Puji Sulistiawati"}}
+{"timestamp": "2025-09-02T06:30:04.079854", "user_id": "oda", "action": "add_employee", "target_employee": "00171789888", "details": {"name": "Agnes Yulita Purwandari"}}
+{"timestamp": "2025-09-02T06:37:08.450397", "user_id": "raymond", "action": "add_employee", "target_employee": "0017171712", "details": {"name": "Wisnu Powertel"}}
+{"timestamp": "2025-09-02T06:37:27.317668", "user_id": "raymond", "action": "delete_employee", "target_employee": "0017171712", "details": {}}
+{"timestamp": "2025-09-02T09:04:19.843516", "user_id": "rafael", "action": "edit_employee", "target_employee": "000627121", "details": {"old_ref_id": "000627121", "new_ref_id": "000627121", "new_name": "Yoseph Nugroho12"}}
+{"timestamp": "2025-09-02T09:04:27.239061", "user_id": "rafael", "action": "edit_employee", "target_employee": "000627121", "details": {"old_ref_id": "000627121", "new_ref_id": "000627121", "new_name": "Yoseph Nugroho"}}
+{"timestamp": "2025-09-02T09:04:40.252004", "user_id": "rafael", "action": "edit_employee", "target_employee": "0011528554", "details": {"old_ref_id": "0011528554", "new_ref_id": "0011528554", "new_name": "Rafael Daniel Culadi1225"}}
+{"timestamp": "2025-09-02T09:04:59.094778", "user_id": "rafael", "action": "edit_employee", "target_employee": "0011528554", "details": {"old_ref_id": "0011528554", "new_ref_id": "0011528554", "new_name": "Rafael Daniel Culadi"}}
+{"timestamp": "2025-09-02T09:06:04.800443", "user_id": "rafael", "action": "edit_employee", "target_employee": "00171789888", "details": {"old_ref_id": "00171789888", "new_ref_id": "00171789888", "new_name": "Agnes Yulita Purwandari12"}}
+{"timestamp": "2025-09-02T09:06:30.291375", "user_id": "rafael", "action": "edit_employee", "target_employee": "00171789888", "details": {"old_ref_id": "00171789888", "new_ref_id": "00171789888", "new_name": "Agnes Yulita Purwandari"}}
+{"timestamp": "2025-09-02T09:06:49.644371", "user_id": "rafael", "action": "edit_employee", "target_employee": "098112322", "details": {"old_ref_id": "098112322", "new_ref_id": "098112322", "new_name": "Handrow12"}}
+{"timestamp": "2025-09-02T09:06:57.634949", "user_id": "rafael", "action": "edit_employee", "target_employee": "098112322", "details": {"old_ref_id": "098112322", "new_ref_id": "098112322", "new_name": "Handrow"}}
+{"timestamp": "2025-09-02T09:07:37.165946", "user_id": "rafael", "action": "edit_employee", "target_employee": "000627121", "details": {"old_ref_id": "000627121", "new_ref_id": "000627121", "new_name": "Yoseph Nugroho2555"}}
+{"timestamp": "2025-09-02T09:07:47.625246", "user_id": "rafael", "action": "edit_employee", "target_employee": "000627121", "details": {"old_ref_id": "000627121", "new_ref_id": "000627121", "new_name": "Yoseph Nugroho"}}
+{"timestamp": "2025-09-02T09:09:45.693993", "user_id": "rafael", "action": "edit_employee", "target_employee": "000627121", "details": {"old_ref_id": "000627121", "new_ref_id": "000627121", "new_name": "Yoseph Nugroho12"}}
+{"timestamp": "2025-09-02T09:09:59.492926", "user_id": "rafael", "action": "edit_employee", "target_employee": "000627121", "details": {"old_ref_id": "000627121", "new_ref_id": "000627121", "new_name": "Yoseph Nugroho"}}
+{"timestamp": "2025-09-02T10:46:39.560144", "user_id": "rafael", "action": "edit_employee", "target_employee": "000627121", "details": {"old_ref_id": "000627121", "new_ref_id": "000627121", "new_name": "Yoseph Nugroho"}}
+{"timestamp": "2025-09-03T00:12:50.350455", "user_id": "fernita", "action": "edit_employee", "target_employee": "000627121", "details": {"old_ref_id": "000627121", "new_ref_id": "000627121", "new_name": "Yoseph Nugroho12"}}
+{"timestamp": "2025-09-03T00:13:00.434088", "user_id": "fernita", "action": "edit_employee", "target_employee": "000627121", "details": {"old_ref_id": "000627121", "new_ref_id": "000627121", "new_name": "Yoseph Nugroho"}}
+{"timestamp": "2025-09-03T00:13:13.493036", "user_id": "fernita", "action": "edit_employee", "target_employee": "0002251251", "details": {"old_ref_id": "0002251251", "new_ref_id": "0002251251", "new_name": "Abdul Halim...."}}
+{"timestamp": "2025-09-03T00:13:24.268876", "user_id": "fernita", "action": "edit_employee", "target_employee": "0002251251", "details": {"old_ref_id": "0002251251", "new_ref_id": "0002251251", "new_name": "Abdul Halim"}}
+{"timestamp": "2025-09-03T05:53:22.986805", "user_id": "handrow", "action": "delete_employee", "target_employee": "87801231", "details": {}}
+{"timestamp": "2025-09-03T05:53:27.765958", "user_id": "handrow", "action": "delete_employee", "target_employee": "000545488787", "details": {}}
+{"timestamp": "2025-09-03T06:07:08.847980", "user_id": "handrow", "action": "edit_employee", "target_employee": "0003700096", "details": {"old_ref_id": "0003700096", "new_ref_id": "0003700096", "new_name": "Raymond Brian Thenesius12"}}
+{"timestamp": "2025-09-03T06:07:21.408100", "user_id": "handrow", "action": "edit_employee", "target_employee": "0003700096", "details": {"old_ref_id": "0003700096", "new_ref_id": "0003700096", "new_name": "Raymond Brian Thenesius"}}
+{"timestamp": "2025-09-04T00:23:11.325190", "user_id": "handrow", "action": "delete_employee", "target_employee": "77777777", "details": {}}
+{"timestamp": "2025-09-04T00:23:14.341360", "user_id": "handrow", "action": "delete_employee", "target_employee": "69696969", "details": {}}
+{"timestamp": "2025-09-04T00:23:17.707736", "user_id": "handrow", "action": "delete_employee", "target_employee": "176117171", "details": {}}
+{"timestamp": "2025-09-04T00:23:43.884214", "user_id": "handrow", "action": "delete_employee", "target_employee": "69696969", "details": {}}
+{"timestamp": "2025-09-04T00:23:53.325000", "user_id": "handrow", "action": "delete_employee", "target_employee": "77777777", "details": {}}
+{"timestamp": "2025-09-04T00:23:56.559802", "user_id": "handrow", "action": "delete_employee", "target_employee": "176117171", "details": {}}
+{"timestamp": "2025-09-04T00:27:03.088951", "user_id": "handrow", "action": "import_employees", "target_employee": "Multiple Employees", "details": {"added": 3, "duplicates": 0}}
+{"timestamp": "2025-09-04T00:29:08.405332", "user_id": "rafael", "action": "import_employees", "target_employee": "Multiple Employees", "details": {"added": 0, "duplicates": 3}}
+{"timestamp": "2025-09-04T00:44:20.283489", "user_id": "rafael", "action": "import_employees", "target_employee": "Multiple Employees", "details": {"added": 0, "duplicates": 3}}
+{"timestamp": "2025-09-04T00:54:32.438816", "user_id": "raymond", "action": "import_employees", "target_employee": "Multiple Employees", "details": {"added": 4, "duplicates": 0}}
+{"timestamp": "2025-09-04T00:55:04.810434", "user_id": "raymond", "action": "import_employees", "target_employee": "Multiple Employees", "details": {"added": 0, "duplicates": 4}}
+{"timestamp": "2025-09-04T00:55:38.220127", "user_id": "raymond", "action": "delete_employee", "target_employee": "4", "details": {}}
+{"timestamp": "2025-09-04T00:55:42.180783", "user_id": "raymond", "action": "delete_employee", "target_employee": "3", "details": {}}
+{"timestamp": "2025-09-04T00:55:46.766200", "user_id": "raymond", "action": "delete_employee", "target_employee": "2", "details": {}}
+{"timestamp": "2025-09-04T00:55:51.009380", "user_id": "raymond", "action": "delete_employee", "target_employee": "1", "details": {}}
+{"timestamp": "2025-09-04T01:20:17.157082", "user_id": "rafael", "action": "import_employees", "target_employee": "Multiple Employees", "details": {"added": 0, "duplicates": 3}}
+{"timestamp": "2025-09-04T01:23:32.886344", "user_id": "rafael", "action": "import_employees", "target_employee": "Multiple Employees", "details": {"added": 1, "duplicates": 3}}
+{"timestamp": "2025-09-04T01:24:47.523522", "user_id": "rafael", "action": "import_employees", "target_employee": "Multiple Employees", "details": {"added": 1, "duplicates": 3}}
+{"timestamp": "2025-09-04T01:24:56.604124", "user_id": "rafael", "action": "delete_employee", "target_employee": "176117171222", "details": {}}
+{"timestamp": "2025-09-04T03:06:45.908239", "user_id": "rafael", "action": "add_employee", "target_employee": "2525", "details": {"name": "2testt"}}
+{"timestamp": "2025-09-04T03:06:54.147751", "user_id": "rafael", "action": "delete_employee", "target_employee": "2525", "details": {}}
+{"timestamp": "2025-09-04T03:46:00.403373", "user_id": "rafael", "action": "import_employees", "target_employee": "Multiple Employees", "details": {"added": 2, "duplicates": 0}}
+{"timestamp": "2025-09-04T03:46:10.148737", "user_id": "rafael", "action": "delete_employee", "target_employee": "REF002", "details": {}}
+{"timestamp": "2025-09-04T03:46:13.198624", "user_id": "rafael", "action": "delete_employee", "target_employee": "REF003", "details": {}}
+{"timestamp": "2025-09-04T03:48:54.231515", "user_id": "rafael", "action": "import_employees", "target_employee": "Multiple Employees", "details": {"added": 2, "duplicates": 0}}
+{"timestamp": "2025-09-04T03:49:07.207817", "user_id": "rafael", "action": "delete_employee", "target_employee": "REF003", "details": {}}
+{"timestamp": "2025-09-04T03:49:10.369394", "user_id": "rafael", "action": "delete_employee", "target_employee": "REF002", "details": {}}
+{"timestamp": "2025-09-04T04:24:54.608404", "user_id": "rafael", "action": "import_employees", "target_employee": "Multiple Employees", "details": {"added": 1, "duplicates": 3}}
+{"timestamp": "2025-09-04T04:25:09.996924", "user_id": "rafael", "action": "delete_employee", "target_employee": "176117171222", "details": {}}
+{"timestamp": "2025-09-04T06:03:45.962991", "user_id": "rafael", "action": "edit_employee", "target_employee": "007171717", "details": {"old_ref_id": "007171717", "new_ref_id": "007171717", "new_name": "Kezia Elizabeth"}}
+{"timestamp": "2025-09-04T08:08:33.119333", "user_id": "rafael", "action": "import_employees", "target_employee": "Multiple Employees", "details": {"added": 1, "duplicates": 3}}
+{"timestamp": "2025-09-04T08:08:39.420017", "user_id": "rafael", "action": "delete_employee", "target_employee": "176117171222", "details": {}}
+{"timestamp": "2025-09-04T08:13:08.628950", "user_id": "rafael", "action": "delete_employee", "target_employee": "61612222", "details": {}}
+{"timestamp": "2025-09-04T08:18:33.369010", "user_id": "rafael", "action": "add_employee", "target_employee": "17171888", "details": {"name": "Gladys Gabriele"}}
+{"timestamp": "2025-09-04T08:18:37.589691", "user_id": "rafael", "action": "delete_employee", "target_employee": "17171888", "details": {"name": "Gladys Gabriele"}}
+{"timestamp": "2025-09-04T08:27:21.141527", "user_id": "rafael", "action": "edit_employee", "target_employee": "001781812", "details": {"old_ref_id": "001781812", "new_ref_id": "001781812", "old_name": "Puji Sulistiawati", "new_name": "Puji Sulistiawati12"}}
+{"timestamp": "2025-09-04T08:27:41.461117", "user_id": "rafael", "action": "edit_employee", "target_employee": "001781812", "details": {"old_ref_id": "001781812", "new_ref_id": "001781812", "old_name": "Puji Sulistiawati12", "new_name": "Puji Sulistiawati"}}
+{"timestamp": "2025-09-04T08:28:37.563856", "user_id": "rafael", "action": "edit_employee", "target_employee": "00171789888", "details": {"old_ref_id": "00171789888", "new_ref_id": "00171789888", "old_name": "Agnes Yulita Purwandari", "new_name": "Agnes Yulita Purwandariiii"}}
+{"timestamp": "2025-09-04T08:28:45.753524", "user_id": "rafael", "action": "edit_employee", "target_employee": "00171789888", "details": {"old_ref_id": "00171789888", "new_ref_id": "00171789888", "old_name": "Agnes Yulita Purwandariiii", "new_name": "Agnes Yulita Purwandari"}}
+{"timestamp": "2025-09-04T08:29:01.789559", "user_id": "handrow", "action": "edit_employee", "target_employee": "00171789888", "details": {"old_ref_id": "00171789888", "new_ref_id": "00171789888", "old_name": "Agnes Yulita Purwandari", "new_name": "Agnes Yulita Purwandaris"}}
+{"timestamp": "2025-09-04T08:29:12.610185", "user_id": "handrow", "action": "edit_employee", "target_employee": "00171789888", "details": {"old_ref_id": "00171789888", "new_ref_id": "00171789888", "old_name": "Agnes Yulita Purwandaris", "new_name": "Agnes Yulita Purwandari"}}
+{"timestamp": "2025-09-04T08:39:49.274148", "user_id": "handrow", "action": "edit_employee", "target_employee": "098112322", "details": {"old_ref_id": "098112322", "new_ref_id": "098112322", "old_name": "Handrow", "new_name": "Handrows"}}
+{"timestamp": "2025-09-04T08:39:56.763201", "user_id": "handrow", "action": "edit_employee", "target_employee": "098112322", "details": {"old_ref_id": "098112322", "new_ref_id": "098112322", "old_name": "Handrows", "new_name": "Handrow"}}
+{"timestamp": "2025-09-07T01:42:39.590425", "user_id": "rafael", "action": "add_employee", "target_employee": "0003688343", "details": {"name": "Gladys Gabriele"}}
+{"timestamp": "2025-09-10T06:38:26.684251", "user_id": "rafael", "action": "import_employees", "target_employee": "Multiple Employees", "details": {"added": 5, "duplicates": 2}}
+{"timestamp": "2025-09-10T06:39:10.098489", "user_id": "rafael", "action": "delete_employee", "target_employee": "61612222", "details": {"name": "Gladys Gabriele"}}
+{"timestamp": "2025-09-10T06:39:20.896437", "user_id": "rafael", "action": "delete_employee", "target_employee": "176117171222", "details": {"name": "Virya Oey"}}
+{"timestamp": "2025-09-10T06:41:09.524181", "user_id": "rafael", "action": "delete_employee", "target_employee": "717172", "details": {"name": "Maria Assumpta Anindita Suryaningrum"}}
+{"timestamp": "2025-09-11T00:21:38.168784", "user_id": "rafael", "action": "add_employee", "target_employee": "00251761712", "details": {"name": "Maria Assumpta Anindita Suryaningrum"}}
+{"timestamp": "2025-09-11T01:24:48.696737", "user_id": "rafael", "action": "archive_employee", "target_employee": "8816161", "details": {"name": "Tan Malaka"}}
+{"timestamp": "2025-09-11T01:25:13.876386", "user_id": "rafael", "action": "restore_employee", "target_employee": "8816161", "details": {"name": "Tan Malaka"}}
+{"timestamp": "2025-09-11T02:05:27.349938", "user_id": "rafael", "action": "import_employees", "target_employee": "Multiple Employees", "details": {"added": 3, "duplicates": 4}}
+{"timestamp": "2025-09-11T02:05:41.840408", "user_id": "rafael", "action": "archive_employee", "target_employee": "717172", "details": {"name": "Maria Assumpta Anindita Suryaningrum"}}
+{"timestamp": "2025-09-11T02:05:48.027988", "user_id": "rafael", "action": "archive_employee", "target_employee": "176117171222", "details": {"name": "Virya Oey"}}
+{"timestamp": "2025-09-11T02:06:34.939684", "user_id": "rafael", "action": "edit_employee", "target_employee": "26262626262", "details": {"old_ref_id": "26262626262", "new_ref_id": "26262626262", "old_name": "David Lidian", "new_name": "David Lidian2"}}
+{"timestamp": "2025-09-11T02:06:43.445454", "user_id": "rafael", "action": "edit_employee", "target_employee": "26262626262", "details": {"old_ref_id": "26262626262", "new_ref_id": "26262626262", "old_name": "David Lidian2", "new_name": "David Lidian"}}
+{"timestamp": "2025-09-11T02:10:38.856032", "user_id": "rafael", "action": "archive_employee", "target_employee": "8816161", "details": {"name": "Tan Malaka"}}
+{"timestamp": "2025-09-11T02:10:50.078197", "user_id": "rafael", "action": "restore_employee", "target_employee": "8816161", "details": {"name": "Tan Malaka"}}
+{"timestamp": "2025-09-11T02:28:14.094308", "user_id": "handrow", "action": "archive_employee", "target_employee": "8816161", "details": {"name": "Tan Malaka"}}
+{"timestamp": "2025-09-11T02:28:31.294944", "user_id": "handrow", "action": "restore_employee", "target_employee": "8816161", "details": {"name": "Tan Malaka"}}
+{"timestamp": "2025-09-11T02:32:27.315586", "user_id": "handrow", "action": "permanent_delete_employee", "target_employee": "176117171222", "details": {"name": "Virya Oey"}}
+{"timestamp": "2025-09-11T02:35:11.385489", "user_id": "handrow", "action": "permanent_delete_employee", "target_employee": "717172", "details": {"name": "Maria Assumpta Anindita Suryaningrum"}}
+{"timestamp": "2025-09-11T02:36:29.396367", "user_id": "handrow", "action": "archive_employee", "target_employee": "8816161", "details": {"name": "Tan Malaka"}}
+{"timestamp": "2025-09-11T02:57:15.493107", "user_id": "handrow", "action": "import_employees", "target_employee": "Multiple Employees", "details": {"added": 2, "duplicates": 0}}
+{"timestamp": "2025-09-11T02:57:26.162829", "user_id": "handrow", "action": "archive_employee", "target_employee": "REF002", "details": {"name": "Nama Karyawan 2"}}
+{"timestamp": "2025-09-11T02:57:29.681296", "user_id": "handrow", "action": "archive_employee", "target_employee": "REF003", "details": {"name": "Nama Karyawan 3"}}
+{"timestamp": "2025-09-11T03:08:03.328987", "user_id": "handrow", "action": "add_employee", "target_employee": "00712322", "details": {"name": "Titut Situyoso"}}
+{"timestamp": "2025-09-11T03:58:27.137426", "user_id": "handrow", "action": "restore_employee", "target_employee": "8816161", "details": {"name": "Tan Malaka"}}
+{"timestamp": "2025-09-11T04:06:26.995052", "user_id": "rafael", "action": "permanent_delete_employee", "target_employee": "REF002", "details": {"name": "Nama Karyawan 2"}}
+{"timestamp": "2025-09-11T06:45:05.940468", "user_id": "rafael", "action": "archive_employee", "target_employee": "61612222", "details": {"name": "Gladys Gabriele"}}
+{"timestamp": "2025-09-11T06:45:16.675238", "user_id": "rafael", "action": "permanent_delete_employee", "target_employee": "61612222", "details": {"name": "Gladys Gabriele"}}
+{"timestamp": "2025-09-11T06:45:28.189086", "user_id": "rafael", "action": "permanent_delete_employee", "target_employee": "REF003", "details": {"name": "Nama Karyawan 3"}}
+{"timestamp": "2025-09-11T06:45:39.900185", "user_id": "rafael", "action": "permanent_delete_employee", "target_employee": "61612222", "details": {"name": "Gladys Gabriele"}}
+{"timestamp": "2025-09-11T06:49:47.617584", "user_id": "rafael", "action": "permanent_delete_employee", "target_employee": "61612222", "details": {"name": "Gladys Gabriele"}}
+{"timestamp": "2025-09-11T06:50:38.712020", "user_id": "rafael", "action": "restore_employee", "target_employee": "61612222", "details": {"name": "Gladys Gabriele"}}
+{"timestamp": "2025-09-11T06:51:17.161824", "user_id": "rafael", "action": "archive_employee", "target_employee": "61612222", "details": {"name": "Gladys Gabriele"}}
+{"timestamp": "2025-09-11T06:53:42.071302", "user_id": "rafael", "action": "permanent_delete_employee", "target_employee": "61612222", "details": {"name": "Gladys Gabriele"}}
+{"timestamp": "2025-09-11T06:54:28.546653", "user_id": "rafael", "action": "permanent_delete_employee", "target_employee": "61612222", "details": {"name": "Gladys Gabriele"}}
+{"timestamp": "2025-09-11T06:58:15.433084", "user_id": "rafael", "action": "permanent_delete_employee", "target_employee": "61612222", "details": {"name": "Gladys Gabriele"}}
+{"timestamp": "2025-09-11T07:20:16.726124", "user_id": "rafael", "action": "edit_employee", "target_employee": "007171717", "details": {"old_ref_id": "007171717", "new_ref_id": "007171717", "old_name": "Kezia Elizabeth", "new_name": "Kezia Elizabeth12"}}
+{"timestamp": "2025-09-11T07:20:41.368190", "user_id": "rafael", "action": "import_employees", "target_employee": "Multiple Employees", "details": {"added": 3, "duplicates": 4}}
+{"timestamp": "2025-09-11T07:20:58.717796", "user_id": "rafael", "action": "archive_employee", "target_employee": "61612222", "details": {"name": "Gladys Gabriele"}}
+{"timestamp": "2025-09-11T07:21:07.454727", "user_id": "rafael", "action": "archive_employee", "target_employee": "176117171222", "details": {"name": "Virya Oey"}}
+{"timestamp": "2025-09-11T07:21:21.326270", "user_id": "rafael", "action": "edit_employee", "target_employee": "007171717", "details": {"old_ref_id": "007171717", "new_ref_id": "007171717", "old_name": "Kezia Elizabeth12", "new_name": "Kezia Elizabeth"}}
+{"timestamp": "2025-09-11T07:21:33.996327", "user_id": "rafael", "action": "archive_employee", "target_employee": "717172", "details": {"name": "Maria Assumpta Anindita Suryaningrum"}}
+{"timestamp": "2025-09-11T07:21:47.699802", "user_id": "rafael", "action": "permanent_delete_employee", "target_employee": "61612222", "details": {"name": "Gladys Gabriele"}}
+{"timestamp": "2025-09-11T07:22:05.235062", "user_id": "rafael", "action": "archive_employee", "target_employee": "00712322", "details": {"name": "Titut Situyoso"}}
+{"timestamp": "2025-09-11T07:22:09.468377", "user_id": "rafael", "action": "permanent_delete_employee", "target_employee": "00712322", "details": {"name": "Titut Situyoso"}}
+{"timestamp": "2025-09-15T01:28:05.045141", "user_id": "rafael", "action": "import_employees", "target_employee": "Multiple Employees", "details": {"added": 26, "duplicates": 0}}
+{"timestamp": "2025-09-15T01:28:16.554561", "user_id": "rafael", "action": "archive_employee", "target_employee": "9", "details": {"name": "Agnes Yulita Purwandari"}}
+{"timestamp": "2025-09-15T01:28:20.367731", "user_id": "rafael", "action": "archive_employee", "target_employee": "8", "details": {"name": "Virya Oey"}}
+{"timestamp": "2025-09-15T01:28:32.244670", "user_id": "rafael", "action": "archive_employee", "target_employee": "1", "details": {"name": "Rafael Daniel Culadi"}}
+{"timestamp": "2025-09-15T01:28:36.238563", "user_id": "rafael", "action": "archive_employee", "target_employee": "3", "details": {"name": "David Lidian"}}
+{"timestamp": "2025-09-15T01:28:39.369942", "user_id": "rafael", "action": "archive_employee", "target_employee": "4", "details": {"name": "Kezia Elizabeth"}}
+{"timestamp": "2025-09-15T01:28:42.333773", "user_id": "rafael", "action": "archive_employee", "target_employee": "5", "details": {"name": "Handrow"}}
+{"timestamp": "2025-09-15T01:28:45.397558", "user_id": "rafael", "action": "archive_employee", "target_employee": "6", "details": {"name": "Rendy Adrianto"}}
+{"timestamp": "2025-09-15T01:28:48.339763", "user_id": "rafael", "action": "archive_employee", "target_employee": "7", "details": {"name": "Andreas Rino Sanjaya"}}
+{"timestamp": "2025-09-15T01:28:52.367695", "user_id": "rafael", "action": "archive_employee", "target_employee": "25", "details": {"name": "Gladys Gabriele"}}
+{"timestamp": "2025-09-15T01:28:55.538789", "user_id": "rafael", "action": "archive_employee", "target_employee": "26", "details": {"name": "Tan Malaka"}}
+{"timestamp": "2025-09-15T01:28:58.505274", "user_id": "rafael", "action": "archive_employee", "target_employee": "24", "details": {"name": "Handrow"}}
+{"timestamp": "2025-09-15T01:29:01.452094", "user_id": "rafael", "action": "archive_employee", "target_employee": "23", "details": {"name": "Virya Oey"}}
+{"timestamp": "2025-09-15T01:29:04.498911", "user_id": "rafael", "action": "archive_employee", "target_employee": "22", "details": {"name": "Reza Pahlava"}}
+{"timestamp": "2025-09-15T01:29:07.345036", "user_id": "rafael", "action": "archive_employee", "target_employee": "21", "details": {"name": "Kezia Elizabeth"}}
+{"timestamp": "2025-09-15T01:29:10.148824", "user_id": "rafael", "action": "archive_employee", "target_employee": "20", "details": {"name": "Fernita Tri Setyawati"}}
+{"timestamp": "2025-09-15T01:29:14.269542", "user_id": "rafael", "action": "archive_employee", "target_employee": "2", "details": {"name": "Raymond Brian Thenesius"}}
+{"timestamp": "2025-09-15T01:29:18.802851", "user_id": "rafael", "action": "archive_employee", "target_employee": "19", "details": {"name": "David Lidian"}}
+{"timestamp": "2025-09-15T01:29:24.486964", "user_id": "rafael", "action": "archive_employee", "target_employee": "18", "details": {"name": "Raymond Brian Thenesius"}}
+{"timestamp": "2025-09-15T01:29:27.526513", "user_id": "rafael", "action": "archive_employee", "target_employee": "17", "details": {"name": "Maria Assumpta Anindita Suryaningrum"}}
+{"timestamp": "2025-09-15T01:29:31.155123", "user_id": "rafael", "action": "archive_employee", "target_employee": "16", "details": {"name": "Rafael Daniel Culadi"}}
+{"timestamp": "2025-09-15T01:29:34.015882", "user_id": "rafael", "action": "archive_employee", "target_employee": "15", "details": {"name": "Tan Malaka"}}
+{"timestamp": "2025-09-15T01:29:36.776604", "user_id": "rafael", "action": "archive_employee", "target_employee": "14", "details": {"name": "Fernita Tri Setyawati"}}
+{"timestamp": "2025-09-15T01:29:39.509794", "user_id": "rafael", "action": "archive_employee", "target_employee": "13", "details": {"name": "Reza Pahlava"}}
+{"timestamp": "2025-09-15T01:29:42.503810", "user_id": "rafael", "action": "archive_employee", "target_employee": "12", "details": {"name": "Abdul Halim"}}
+{"timestamp": "2025-09-15T01:29:45.379879", "user_id": "rafael", "action": "archive_employee", "target_employee": "11", "details": {"name": "Yoseph Nugroho"}}
+{"timestamp": "2025-09-15T01:29:49.033136", "user_id": "rafael", "action": "archive_employee", "target_employee": "10", "details": {"name": "Puji Sulistiawati"}}
+{"timestamp": "2025-09-15T01:30:07.619382", "user_id": "rafael", "action": "permanent_delete_employee", "target_employee": "10", "details": {"name": "Puji Sulistiawati"}}
+{"timestamp": "2025-09-15T01:30:10.497191", "user_id": "rafael", "action": "permanent_delete_employee", "target_employee": "11", "details": {"name": "Yoseph Nugroho"}}
+{"timestamp": "2025-09-15T01:30:14.086367", "user_id": "rafael", "action": "permanent_delete_employee", "target_employee": "12", "details": {"name": "Abdul Halim"}}
+{"timestamp": "2025-09-15T01:30:23.889763", "user_id": "rafael", "action": "permanent_delete_employee", "target_employee": "13", "details": {"name": "Reza Pahlava"}}
+{"timestamp": "2025-09-15T01:30:26.905635", "user_id": "rafael", "action": "permanent_delete_employee", "target_employee": "14", "details": {"name": "Fernita Tri Setyawati"}}
+{"timestamp": "2025-09-15T01:30:29.734900", "user_id": "rafael", "action": "permanent_delete_employee", "target_employee": "15", "details": {"name": "Tan Malaka"}}
+{"timestamp": "2025-09-15T01:30:34.464981", "user_id": "rafael", "action": "permanent_delete_employee", "target_employee": "16", "details": {"name": "Rafael Daniel Culadi"}}
+{"timestamp": "2025-09-15T01:30:37.494092", "user_id": "rafael", "action": "permanent_delete_employee", "target_employee": "17", "details": {"name": "Maria Assumpta Anindita Suryaningrum"}}
+{"timestamp": "2025-09-15T01:30:40.835615", "user_id": "rafael", "action": "permanent_delete_employee", "target_employee": "18", "details": {"name": "Raymond Brian Thenesius"}}
+{"timestamp": "2025-09-15T01:30:44.666842", "user_id": "rafael", "action": "permanent_delete_employee", "target_employee": "19", "details": {"name": "David Lidian"}}
+{"timestamp": "2025-09-15T01:47:12.472452", "user_id": "rafael", "action": "add_employee", "target_employee": "226", "details": {"name": "266"}}
+{"timestamp": "2025-09-15T01:47:15.229730", "user_id": "rafael", "action": "archive_employee", "target_employee": "226", "details": {"name": "266"}}
+{"timestamp": "2025-09-15T01:47:52.091692", "user_id": "rafael", "action": "permanent_delete_employee", "target_employee": "226", "details": {"name": "266"}}
+{"timestamp": "2025-09-15T01:50:16.673170", "user_id": "rafael", "action": "add_employee", "target_employee": "1241", "details": {"name": "test"}}
+{"timestamp": "2025-09-15T01:50:20.087498", "user_id": "rafael", "action": "add_employee", "target_employee": "6161", "details": {"name": "test"}}
+{"timestamp": "2025-09-15T01:50:22.911293", "user_id": "rafael", "action": "archive_employee", "target_employee": "6161", "details": {"name": "test"}}
+{"timestamp": "2025-09-15T01:50:26.830028", "user_id": "rafael", "action": "archive_employee", "target_employee": "1241", "details": {"name": "test"}}
+{"timestamp": "2025-09-15T01:52:56.242543", "user_id": "rafael", "action": "permanent_delete_employee", "target_employee": "1241", "details": {"name": "test"}}
+{"timestamp": "2025-09-15T01:52:56.257760", "user_id": "rafael", "action": "permanent_delete_employee", "target_employee": "6161", "details": {"name": "test"}}
+{"timestamp": "2025-09-15T01:56:00.018322", "user_id": "rafael", "action": "add_employee", "target_employee": "24242", "details": {"name": "testt"}}
+{"timestamp": "2025-09-15T01:56:07.688147", "user_id": "rafael", "action": "archive_employee", "target_employee": "24242", "details": {"name": "testt"}}
+{"timestamp": "2025-09-15T01:56:21.225341", "user_id": "rafael", "action": "permanent_delete_employee", "target_employee": "24242", "details": {"name": "testt"}}
+{"timestamp": "2025-09-15T02:01:20.340644", "user_id": "rafael", "action": "add_employee", "target_employee": "232321512554", "details": {"name": "testt"}}
+{"timestamp": "2025-09-15T02:01:23.543220", "user_id": "rafael", "action": "archive_employee", "target_employee": "232321512554", "details": {"name": "testt"}}
+{"timestamp": "2025-09-15T02:01:40.699276", "user_id": "rafael", "action": "permanent_delete_employee", "target_employee": "232321512554", "details": {"name": "testt"}}
+{"timestamp": "2025-09-15T02:02:05.009495", "user_id": "rafael", "action": "add_employee", "target_employee": "2525252", "details": {"name": "Test Karyawan"}}
+{"timestamp": "2025-09-15T02:02:09.347874", "user_id": "rafael", "action": "archive_employee", "target_employee": "2525252", "details": {"name": "Test Karyawan"}}
+{"timestamp": "2025-09-15T04:16:36.654640", "user_id": "rafael", "action": "permanent_delete_employee", "target_employee": "2525252", "details": {"name": "Test Karyawan"}}
+{"timestamp": "2025-09-15T07:08:02.880839", "user_id": "rafael", "action": "add_employee", "target_employee": "71717", "details": {"name": "Test Karyawan"}}
+{"timestamp": "2025-09-15T07:08:12.178417", "user_id": "rafael", "action": "archive_employee", "target_employee": "71717", "details": {"name": "Test Karyawan"}}
+{"timestamp": "2025-09-15T07:14:27.927013", "user_id": "rafael", "action": "add_employee", "target_employee": "26262", "details": {"name": "testt"}}
+{"timestamp": "2025-09-15T07:14:33.666963", "user_id": "rafael", "action": "archive_employee", "target_employee": "26262", "details": {"name": "testt"}}
+{"timestamp": "2025-09-15T07:14:45.139339", "user_id": "rafael", "action": "permanent_delete_employee", "target_employee": "26262", "details": {"name": "testt"}}
+{"timestamp": "2025-09-15T07:14:45.154151", "user_id": "rafael", "action": "permanent_delete_employee", "target_employee": "71717", "details": {"name": "Test Karyawan"}}
+{"timestamp": "2025-09-16T08:06:06.577003", "user_id": "rafael", "action": "edit_employee", "target_employee": "007171717", "details": {"old_ref_id": "007171717", "new_ref_id": "007171717", "old_name": "Kezia Elizabeth", "new_name": "Kezia Elizabeth2"}}
+{"timestamp": "2025-09-16T08:18:29.024874", "user_id": "rafael", "action": "edit_employee", "target_employee": "007171717", "details": {"old_ref_id": "007171717", "new_ref_id": "007171717", "old_name": "Kezia Elizabeth2", "new_name": "Kezia Elizabeth"}}
+{"timestamp": "2025-09-16T08:20:27.193314", "user_id": "rafael", "action": "add_employee", "target_employee": "24242", "details": {"name": "Test Karyawan"}}
+{"timestamp": "2025-09-16T08:20:30.210757", "user_id": "rafael", "action": "archive_employee", "target_employee": "24242", "details": {"name": "Test Karyawan"}}
+{"timestamp": "2025-09-16T08:20:44.977053", "user_id": "rafael", "action": "restore_employee", "target_employee": "24242", "details": {"name": "Test Karyawan"}}
+{"timestamp": "2025-09-16T08:22:01.320073", "user_id": "rafael", "action": "archive_employee", "target_employee": "24242", "details": {"name": "Test Karyawan"}}
+{"timestamp": "2025-09-17T05:50:21.845433", "user_id": "rafael", "action": "add_employee", "target_employee": "881231261", "details": {"name": "Natanael"}}
+{"timestamp": "2025-09-17T06:44:11.245695", "user_id": "rafael", "action": "edit_employee", "target_employee": "0011528554", "details": {"old_ref_id": "0011528554", "new_ref_id": "2119432963", "old_name": "Rafael Daniel Culadi", "new_name": "Rafael Daniel Culadi"}}

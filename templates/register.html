@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Stema Canteen</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='icon.png') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #a0adb9 0%, #388fe6 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .logo h1 {
+            color: white;
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .logo p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: white;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #388fe6;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .links {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .links a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .links a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .flash-message {
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .alert-success {
+            background: rgba(46, 204, 113, 0.2);
+            color: #27ae60;
+            border: 1px solid rgba(46, 204, 113, 0.5);
+        }
+
+        .alert-error {
+            background: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+            border: 1px solid rgba(231, 76, 60, 0.5);
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+        }
+
+        .requirements {
+            margin-top: 8px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .requirement {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .requirement i {
+            margin-right: 6px;
+            font-size: 12px;
+        }
+
+        .requirement.met {
+            color: #2ecc71;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <h1>Stema Canteen</h1>
+            <p>Daftar Admin Baru</p>
+        </div>
+
+        <!-- Flash Messages -->
+        <div class="flash-container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="flash-message alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        <form id="registerForm" method="POST" action="/register-admin">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Masukkan username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-container">
+                    <input type="password" id="password" name="password" placeholder="Masukkan password" required>
+                    <span class="toggle-password" id="togglePassword">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+                <div class="requirements">
+                    <div class="requirement" id="lengthReq">
+                        <i class="fas fa-circle"></i>
+                        <span>Minimal 8 karakter</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Konfirmasi Password</label>
+                <div class="password-container">
+                    <input type="password" id="confirmPassword" name="confirm_password" placeholder="Konfirmasi password" required>
+                    <span class="toggle-password" id="toggleConfirmPassword">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+                <div class="requirements">
+                    <div class="requirement" id="matchReq">
+                        <i class="fas fa-circle"></i>
+                        <span>Password harus cocok</span>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn">Daftar Admin Baru</button>
+        </form>
+
+        <div class="links">
+            <a href="/admin">Kembali ke Admin</a>
+        </div>
+    </div>
+
+    <script>
+        // Toggle password visibility
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const icon = this.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        });
+
+        // Toggle confirm password visibility
+        document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
+            const confirmInput = document.getElementById('confirmPassword');
+            const icon = this.querySelector('i');
+            
+            if (confirmInput.type === 'password') {
+                confirmInput.type = 'text';
+                icon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                confirmInput.type = 'password';
+                icon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        });
+
+        // Password validation
+        const passwordInput = document.getElementById('password');
+        const confirmInput = document.getElementById('confirmPassword');
+        const lengthReq = document.getElementById('lengthReq');
+        const matchReq = document.getElementById('matchReq');
+
+        function validatePassword() {
+            // Check length
+            if (passwordInput.value.length >= 8) {
+                lengthReq.classList.add('met');
+                lengthReq.innerHTML = '<i class="fas fa-check-circle"></i> Minimal 8 karakter';
+            } else {
+                lengthReq.classList.remove('met');
+                lengthReq.innerHTML = '<i class="fas fa-circle"></i> Minimal 8 karakter';
+            }
+
+            // Check match
+            if (passwordInput.value && passwordInput.value === confirmInput.value) {
+                matchReq.classList.add('met');
+                matchReq.innerHTML = '<i class="fas fa-check-circle"></i> Password cocok';
+            } else {
+                matchReq.classList.remove('met');
+                matchReq.innerHTML = '<i class="fas fa-circle"></i> Password harus cocok';
+            }
+        }
+
+        passwordInput.addEventListener('input', validatePassword);
+        confirmInput.addEventListener('input', validatePassword);
+
+        // Form submission validation
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            if (passwordInput.value.length < 8) {
+                e.preventDefault();
+                alert('Password harus minimal 8 karakter');
+                return false;
+            }
+
+            if (passwordInput.value !== confirmInput.value) {
+                e.preventDefault();
+                alert('Password dan konfirmasi password tidak cocok');
+                return false;
+            }
+        });
+    </script>
+</body>
+</html>

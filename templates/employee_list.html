@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Karyawan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='icon.png') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            padding: 20px;
+            background: linear-gradient(135deg, #a0adb9 0%, #388fe6 100%);
+            min-height: 100vh;
+            margin: 0;
+            color: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        h2 {
+            color: white;
+            margin: 0;
+            font-weight: 600;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            margin-left: 17%;
+        }
+        
+        /* Flash message styles - FIXED */
+        .flash-container {
+            margin-bottom: 0;
+            min-height: 0;
+            transition: min-height 0.5s ease, margin-bottom 0.5s ease;
+        }
+        
+        .flash-container:empty {
+            margin-bottom: 0;
+            min-height: 0;
+        }
+        
+        .flash-message {
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-weight: 500;
+            backdrop-filter: blur(8px);
+            animation: fadeIn 0.5s, fadeOut 0.5s 4.5s forwards;
+        }
+        
+        /* Ensure the element collapses after animation */
+        .flash-message {
+            overflow: hidden;
+        }
+        
+        @keyframes fadeOut {
+            from { 
+                opacity: 1; 
+                transform: translateY(0);
+                max-height: 100px;
+                margin-bottom: 15px;
+            }
+            to { 
+                opacity: 0; 
+                transform: translateY(-20px);
+                max-height: 0;
+                margin-bottom: 0;
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+        }
+        
+        .alert-success {
+            background: rgba(40, 167, 69, 0.2);
+            color: #d4edda;
+            border: 1px solid rgba(40, 167, 69, 0.3);
+        }
+        
+        .alert-warning {
+            background: rgba(255, 193, 7, 0.2);
+            color: #fff3cd;
+            border: 1px solid rgba(255, 193, 7, 0.3);
+        }
+        
+        .alert-danger {
+            background: rgba(220, 53, 69, 0.2);
+            color: #f8d7da;
+            border: 1px solid rgba(220, 53, 69, 0.3);
+        }
+        
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(-10px);
+                max-height: 0;
+                margin-bottom: 0;
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+                max-height: 100px;
+                margin-bottom: 15px;
+            }
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+        
+        th, td {
+            padding: 15px 20px;
+            text-align: left;
+        }
+        
+        th {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        tr {
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        tr:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(5px);
+        }
+        
+        tr:not(:last-child) {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        td {
+            font-weight: 300;
+            position: relative;
+        }
+        
+        td:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        }
+
+        /* Action buttons */
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 9px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-edit {
+            background-color: rgba(58, 134, 255, 0.7);
+            color: white;
+        }
+
+        .btn-edit:hover {
+            background-color: rgba(58, 134, 255, 0.9);
+            transform: translateY(-2px);
+        }
+
+        .btn-delete {
+            background-color: rgba(255, 71, 87, 0.7);
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background-color: rgba(255, 71, 87, 0.9);
+            transform: translateY(-2px);
+        }
+
+        .btn-add {
+            background-color: rgba(40, 167, 69, 0.7);
+            color: white;
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+
+        .btn-add:hover {
+            background-color: rgba(40, 167, 69, 0.9);
+            transform: translateY(-2px);
+        }
+
+        .btn-back {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+
+        .btn-back:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+/* Add this for the modal overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Optional: darken background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* Your modal content stays as is */
+.modal-content {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    padding: 25px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Title stays as is */
+.modal-title {
+    margin-top: 0;
+    color: white;
+}
+
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .form-group input {
+            width: 95%;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            color: white;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-cancel {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .btn-cancel:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-save {
+            background-color: rgba(40, 167, 69, 0.7);
+            color: white;
+        }
+
+        .btn-save:hover {
+            background-color: rgba(40, 167, 69, 0.9);
+        }
+        .log-entry {
+    background: linear-gradient(90deg, #5b88bd, #6da1cf); /* your blue background */
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Default left border */
+.log-entry {
+    border-left: 4px solid #fc1e05; /* red as default */
+}
+
+/* Colors by action */
+.log-add {
+    border-left: 4px solid rgb(12, 243, 12);
+}
+
+
+        /* Food Claim History Styles */
+        .food-history-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .food-history-content {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            padding: 25px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .history-table th, .history-table td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        .history-table th {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-weight: 500;
+        }
+
+        .history-table tr {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .history-table tr:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .no-history {
+            text-align: center;
+            padding: 20px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .btn-history {
+            background-color: rgba(14, 168, 155, 0.7);
+            color: white;
+        }
+
+        .btn-history:hover {
+            background-color: rgba(12, 153, 141, 0.7);
+            transform: translateY(-2px);
+        }
+        
+        /* Search and Pagination Styles */
+        .controls-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-input {
+            padding: 10px 15px 10px 40px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            width: 250px;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .pagination {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        .pagination-button {
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .pagination-button:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.25);
+        }
+        
+        .pagination-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .pagination-info {
+            margin: 0 10px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+        
+        .page-size-select {
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+        }
+        
+        .page-size-select option {
+            background: rgba(0, 0, 0, 0.7);
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 30px;
+            color: rgba(255, 255, 255, 0.7);
+            font-style: italic;
+        }
+        .log-import {
+    border-left: 4px solid rgba(106, 176, 76, 0.7);
+}
+.btn-archive {
+    background-color: rgba(151, 92, 228, 0.8);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-archive:hover {
+    background-color: rgba(117, 68, 180, 0.8);
+    transform: translateY(-2px);
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Flash Messages - UPDATED -->
+        <div class="flash-container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="flash-message alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        <div class="header-container">
+            <a href="/admin" class="btn-back" onmouseover="this.style.backgroundColor='rgba(255,255,255,0.3)'" 
+               onmouseout="this.style.backgroundColor='rgba(255,255,255,0.2)'">
+                ← Kembali
+            </a>
+            
+            <h2>Daftar Karyawan</h2>
+            
+ <!-- In your main admin page, add this button to the header-buttons div -->
+<div class="header-buttons">
+    <button class="btn btn-archive" onclick="location.href='/admin/archive'">
+        <i class="fas fa-archive"></i> Arsip
+    </button>
+    <button class="btn btn-import" onclick="openImportModal()">
+        <i class="fas fa-file-import"></i> Import Excel
+    </button>
+    <button class="btn btn-add" onclick="openAddModal()">
+        <i class="fa-solid fa-user-plus" style="margin-right: 6px;"></i> Tambah Karyawan
+    </button>
+</div>
+        </div>
+        
+        <!-- Search and Pagination Controls -->
+        <div class="controls-container">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="searchInput" class="search-input" placeholder="Cari nama karyawan..." oninput="filterEmployees()">
+            </div>
+            
+            <div class="pagination">
+                <select id="pageSizeSelect" class="page-size-select" onchange="changePageSize()">
+                    <option value="5">5 per halaman</option>
+                    <option value="10" selected>10 per halaman</option>
+                    <option value="20">20 per halaman</option>
+                    <option value="50">50 per halaman</option>
+                </select>
+                
+                <button class="pagination-button" id="prevPage" onclick="changePage(currentPage - 1)" disabled>
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                
+                <span class="pagination-info" id="pageInfo">Halaman 1 dari 1</span>
+                
+                <button class="pagination-button" id="nextPage" onclick="changePage(currentPage + 1)" disabled>
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+    <div id="importModal" class="modal">
+        <div class="modal-content">
+            <h3 class="modal-title">Import Karyawan dari Excel</h3>
+            <div class="import-instructions">
+                <p>Format file Excel yang didukung:</p>
+                <ul>
+                    <li>Kolom A: Reference ID (wajib)</li>
+                    <li>Kolom B: Nama Karyawan (wajib)</li>
+                    <li>Baris pertama diabaikan (header)</li>
+                </ul>
+                <p>File harus dalam format .xlsx atau .xls</p>
+                <a href="#" id="downloadTemplate" onclick="downloadTemplate()">Download template Excel</a>
+            </div>
+            <form id="importForm" method="POST" action="{{ url_for('import_employees') }}" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="excelFile">Pilih File Excel</label>
+                    <input type="file" id="excelFile" name="excel_file" accept=".xlsx, .xls" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-cancel" onclick="closeModal()">Batal</button>
+                    <button type="submit" class="btn btn-save">Import</button>
+                </div>
+            </form>
+            <div id="importProgress" class="import-progress" style="display: none;">
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+                <p class="progress-text">Memproses file...</p>
+            </div>
+            <div id="importResults" class="import-results" style="display: none;"></div>
+        </div>
+    </div>
+
+        <table id="employeesTable">
+            <thead>
+                <tr>
+                    <th>Reference ID</th>
+                    <th>Nama</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="employeesTableBody">
+                {% for emp in employees %}
+                <tr data-id="{{ emp.ref_id }}" data-name="{{ emp.name|lower }}">
+                    <td>{{ emp.ref_id }}</td>
+                    <td>{{ emp.name }}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="btn btn-edit" onclick="openEditModal('{{ emp.ref_id }}', '{{ emp.ref_id }}', '{{ emp.name }}')">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-delete" onclick="confirmDelete('{{ emp.ref_id }}', '{{ emp.name }}')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            <button class="btn btn-history" onclick="viewFoodHistory('{{ emp.ref_id }}', '{{ emp.name }}')">
+                                <i class="fas fa-history"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <div id="noResults" class="no-results" style="display: none;">
+            Tidak ada karyawan yang sesuai dengan pencarian Anda.
+        </div>
+
+        <!-- Add this section after the table in your HTML -->
+<div class="logs-section" style="margin-top: 2rem;">
+    <h3 style="color: white; display: flex; justify-content: space-between; align-items: center;">
+        Log Aktivitas (live)
+        <button class="btn btn-add" onclick="refreshLogs()" style="font-size: 12px; padding: 5px 10px;">
+            <i class="fas fa-sync-alt"></i>Refresh
+        </button>
+    </h3>
+    <div class="logs-container" style="max-height: 400px; overflow-y: auto; background: rgba(0, 0, 0, 0.2); border-radius: 10px; padding: 10px;">
+        <div id="activityLogs">
+            <!-- Logs will be loaded here -->
+            <p style="text-align: center; color: rgba(255, 255, 255, 0.7);">Memuat log aktivitas...</p>
+        </div>
+    </div>
+</div>
+
+<!-- Add this CSS for the logs -->
+<style>
+    .log-entry {
+        padding: 10px;
+        margin-bottom: 8px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        font-size: 14px;
+        animation: fadeIn 0.5s;
+    }
+    
+    .log-timestamp {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 12px;
+        margin-bottom: 4px;
+    }
+    
+    .log-action {
+        font-weight: 500;
+    }
+    
+    .log-edit {
+        border-left: 4px solid rgb(4, 66, 158);
+    }
+    
+    .log-delete {
+        border-left: 4px solid rgba(248, 5, 26, 0.7);
+    }
+
+    .log-archive {
+        border-left: 4px solid rgba(116, 30, 230, 0.89);
+    }
+
+    .log-restore {
+        border-left: 4px solid rgba(35, 100, 7, 0.842);
+    }
+    input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Hide spin buttons in Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+.btn-import {
+    background-color: rgba(106, 176, 76, 0.8);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-import:hover {
+    background-color: rgba(77, 129, 54, 0.8);
+    transform: translateY(-2px);
+}
+</style>
+    </div>
+
+    <!-- Add Modal -->
+    <div id="addModal" class="modal">
+        <div class="modal-content">
+            <h3 class="modal-title">Tambah Karyawan Baru</h3>
+            <form id="addForm" method="POST" action="{{ url_for('register_employee') }}">
+                <div class="form-group">
+                    <label for="addRefId">Reference ID</label>
+                    <input type="number" id="addRefId" name="ref_id" required>
+                </div>
+                <div class="form-group">
+                    <label for="addName">Nama Karyawan</label>
+                    <input type="text" id="addName" name="name" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-cancel" onclick="closeModal()">Batal</button>
+                    <button type="submit" class="btn btn-save">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <h3 class="modal-title">Edit Karyawan</h3>
+            <form id="editForm" method="POST">
+                <input type="hidden" name="employee_id" id="editEmployeeId">
+                <div class="form-group">
+                    <label for="editRefId">Reference ID</label>
+                    <input type="text" id="editRefId" name="ref_id" required disabled>
+                </div>
+                <div class="form-group">
+                    <label for="editName">Nama Karyawan</label>
+                    <input type="text" id="editName" name="name" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-cancel" onclick="closeModal()">Batal</button>
+                    <button type="submit" class="btn btn-save">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <h3 class="modal-title">Konfirmasi Hapus</h3>
+            <p id="deleteMessage">Apakah Anda yakin ingin menghapus karyawan ini?</p>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-cancel" onclick="closeModal()">Batal</button>
+                <button type="button" class="btn btn-delete" id="confirmDeleteBtn">Hapus</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Food Claim History Modal -->
+    <div id="foodHistoryModal" class="food-history-modal">
+        <div class="food-history-content">
+            <div class="history-header">
+                <h3 id="historyEmployeeName">Riwayat Klaim Makan</h3>
+                <button type="button" class="btn btn-cancel" onclick="closeFoodHistoryModal()">Tutup</button>
+            </div>
+            <div id="foodHistoryContent">
+                <p class="no-history">Memuat data riwayat...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+    <script>
+let currentPage = 1;
+let pageSize = 10;
+let allEmployees = [];
+let filteredEmployees = [];
+
+function initPagination() {
+    const rows = document.querySelectorAll('#employeesTableBody tr');
+    allEmployees = Array.from(rows);
+
+    allEmployees.forEach(row => {
+        const nameCell = row.cells[1];
+        row.dataset.name = nameCell.textContent.toLowerCase();
+    });
+
+    filteredEmployees = [...allEmployees];
+    pageSize = parseInt(document.getElementById('pageSizeSelect').value);
+    currentPage = 1; // Always start from the first page
+    updatePagination();
+}
+
+
+// Filter employees
+function filterEmployees() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+
+    if (searchTerm === '') {
+        filteredEmployees = [...allEmployees];
+    } else {
+        filteredEmployees = allEmployees.filter(row => row.dataset.name.includes(searchTerm));
+    }
+
+    currentPage = 1;
+    updatePagination();
+}
+
+// Change page size
+function changePageSize() {
+    pageSize = parseInt(document.getElementById('pageSizeSelect').value);
+    currentPage = 1;
+    updatePagination();
+}
+
+// Change page
+function changePage(page) {
+    if (page < 1 || page > Math.ceil(filteredEmployees.length / pageSize)) return;
+    currentPage = page;
+    updatePagination();
+}
+
+// Update pagination
+function updatePagination() {
+    const totalPages = Math.ceil(filteredEmployees.length / pageSize);
+    const startIndex = (currentPage - 1) * pageSize;
+    const endIndex = Math.min(startIndex + pageSize, filteredEmployees.length);
+
+    // Update pagination info
+    document.getElementById('pageInfo').textContent = `Halaman ${currentPage} dari ${totalPages || 1}`;
+    document.getElementById('prevPage').disabled = currentPage === 1;
+    document.getElementById('nextPage').disabled = currentPage === totalPages || totalPages === 0;
+
+    // Show/hide rows
+    allEmployees.forEach(row => row.style.display = 'none');
+    for (let i = startIndex; i < endIndex; i++) {
+        if (filteredEmployees[i]) {
+            filteredEmployees[i].style.display = '';
+        }
+    }
+
+    // Show/hide "No results"
+    document.getElementById('noResults').style.display = filteredEmployees.length === 0 ? 'block' : 'none';
+}
+
+
+// Re-init pagination after DOM changes (adding/deleting employees)
+function reinitialize() {
+    initPagination();
+}
+
+// Hook up events
+document.addEventListener('DOMContentLoaded', () => {
+    initPagination();
+});
+    
+    // Add functionality
+    function openAddModal() {
+        document.getElementById('addRefId').value = '';
+        document.getElementById('addName').value = '';
+        document.getElementById('addModal').style.display = 'flex';
+    }
+
+    // Edit functionality
+    function openEditModal(refId, currentRefId, name) {
+        document.getElementById('editEmployeeId').value = refId;
+        document.getElementById('editRefId').value = currentRefId;
+        document.getElementById('editName').value = name;
+        document.getElementById('editModal').style.display = 'flex';
+    }
+
+    // Delete functionality
+    let employeeToDelete = null;
+
+    function confirmDelete(refId, name) {
+        employeeToDelete = refId;
+        document.getElementById('deleteMessage').innerHTML =
+            `Apakah Anda yakin ingin memindahkan karyawan <b>${name}</b> ke arsip?`;
+        document.getElementById('deleteModal').style.display = 'flex';
+    }
+
+
+    function closeModal() {
+        document.getElementById('addModal').style.display = 'none';
+        document.getElementById('editModal').style.display = 'none';
+        document.getElementById('deleteModal').style.display = 'none';
+        employeeToDelete = null;
+    }
+
+    // Submit edit form
+    document.getElementById('editForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const oldRefId = document.getElementById('editEmployeeId').value;
+        const newRefId = document.getElementById('editRefId').value;
+        const name = document.getElementById('editName').value;
+
+        const response = await fetch(`/employees/${oldRefId}/update`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ ref_id: newRefId, name: name })
+        });
+
+        if (response.ok) {
+            const row = document.querySelector(`tr[data-id="${oldRefId}"]`);
+            if (row) {
+                // Update the data-id attribute if ref_id changed
+                if (oldRefId !== newRefId) {
+                    row.setAttribute('data-id', newRefId);
+                }
+                row.cells[0].textContent = newRefId;
+                row.cells[1].textContent = name;
+                
+                // Update the onclick functions with new values
+                const editButton = row.querySelector('.btn-edit');
+                editButton.setAttribute('onclick', `openEditModal('${newRefId}', '${newRefId}', '${name}')`);
+                
+                const deleteButton = row.querySelector('.btn-delete');
+                deleteButton.setAttribute('onclick', `confirmDelete('${newRefId}', '${name}')`);
+                
+                // Update the history button with new values
+                const historyButton = row.querySelector('.btn-history');
+                historyButton.setAttribute('onclick', `viewFoodHistory('${newRefId}', '${name}')`);
+                
+                // Update search data
+                row.dataset.name = name.toLowerCase();
+            }
+            closeModal();
+            alert("Perubahan berhasil disimpan!");
+            // Reinitialize pagination to reflect changes
+            initPagination();
+        } else {
+            alert("Gagal menyimpan perubahan.");
+        }
+    });
+    
+
+    // Handle add form submission
+    document.getElementById('addForm').addEventListener('submit', function(e) {
+        // Let the form submit normally to the Flask route
+        // The page will reload after submission
+    });
+
+    // Confirm delete
+    document.getElementById('confirmDeleteBtn').addEventListener('click', async function() {
+        if (employeeToDelete) {
+            try {
+                const response = await fetch(`/employees/${employeeToDelete}/delete`, {
+                    method: "POST"
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    const row = document.querySelector(`tr[data-id="${employeeToDelete}"]`);
+                    if (row) {
+                        row.remove();
+                    }
+                    closeModal();
+                    alert("Karyawan berhasil dihapus!");
+                    // Reinitialize pagination to reflect changes
+                    initPagination();
+                } else {
+                    alert(`Gagal menghapus karyawan: ${result.error}`);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert("Terjadi kesalahan saat menghapus karyawan.");
+            }
+        }
+    });
+
+    // Food claim history functionality
+    async function viewFoodHistory(refId, name) {
+        document.getElementById('historyEmployeeName').textContent = `Riwayat Klaim Makan - ${name}`;
+        document.getElementById('foodHistoryModal').style.display = 'flex';
+        
+        try {
+            const response = await fetch(`/employees/${refId}/food-history`);
+            const historyData = await response.json();
+            
+            const historyContent = document.getElementById('foodHistoryContent');
+            
+            if (historyData.length === 0) {
+                historyContent.innerHTML = '<p class="no-history">Tidak ada riwayat klaim makan</p>';
+                return;
+            }
+            
+let html = `
+    <table class="history-table">
+        <thead>
+            <tr>
+                <th>Tanggal</th>
+                <th>Waktu</th>
+            </tr>
+        </thead>
+        <tbody>
+`;
+
+historyData.forEach(entry => {
+    // Create date object from timestamp
+    const date = new Date(entry.timestamp);
+    
+    // Convert to Indonesian time (UTC+7)
+    const indonesianTime = new Date(date.getTime() + (7 * 60 * 60 * 1000));
+    
+    // Format date in Indonesian
+    const formattedDate = indonesianTime.toLocaleDateString('id-ID', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+    
+    // Format time in Indonesian (24-hour format)
+    const formattedTime = indonesianTime.toLocaleTimeString('id-ID', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+    });
+    
+    html += `
+        <tr>
+            <td>${formattedDate}</td>
+            <td>${formattedTime}</td>
+        </tr>
+    `;
+});
+
+html += `
+        </tbody>
+    </table>
+`;
+            
+            historyContent.innerHTML = html;
+        } catch (error) {
+            console.error('Error loading food history:', error);
+            document.getElementById('foodHistoryContent').innerHTML = 
+                '<p class="no-history">Gagal memuat riwayat klaim makan</p>';
+        }
+    }
+
+    function closeFoodHistoryModal() {
+        document.getElementById('foodHistoryModal').style.display = 'none';
+    }
+
+    // Close modal when clicking outside
+    window.addEventListener('click', function(event) {
+        if (event.target.classList.contains('modal')) {
+            closeModal();
+        }
+        if (event.target.classList.contains('food-history-modal')) {
+            closeFoodHistoryModal();
+        }
+    });
+    
+    // Clean up flash messages after they fade out
+    setTimeout(function() {
+        const flashMessages = document.querySelectorAll('.flash-message');
+        flashMessages.forEach(function(message) {
+            if (message.offsetHeight === 0 || getComputedStyle(message).opacity === '0') {
+                message.remove();
+            }
+        });
+    }, 6000); // Run after all messages should have faded out
+
+    // Add this function to fetch and display logs
+async function loadLogs() {
+    try {
+        const response = await fetch('/activity-logs');
+        const logs = await response.json();
+        
+        const logsContainer = document.getElementById('activityLogs');
+        logsContainer.innerHTML = '';
+        
+        if (logs.length === 0) {
+            logsContainer.innerHTML = '<p style="text-align: center; color: rgba(255, 255, 255, 0.7);">Tidak ada aktivitas terbaru</p>';
+            return;
+        }
+        
+logs.forEach(log => {
+    const logEntry = document.createElement('div');
+    logEntry.className = `log-entry log-${log.action.includes('edit') ? 'edit' : 'delete'}`;
+    
+    // Parse the timestamp with proper timezone handling
+    const logDate = new Date(log.timestamp);
+    
+    // Get the timezone offset between UTC and local time (in minutes)
+    const timezoneOffset = logDate.getTimezoneOffset();
+    
+    // Adjust the date by the timezone offset to get correct local time
+    const localDate = new Date(logDate.getTime() - (timezoneOffset * 60000));
+    
+    // Indonesian month names
+    const indonesianMonths = [
+        'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+        'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+    ];
+    
+    const day = localDate.getDate();
+    const month = indonesianMonths[localDate.getMonth()];
+    const year = localDate.getFullYear();
+    const hours = localDate.getHours().toString().padStart(2, '0');
+    const minutes = localDate.getMinutes().toString().padStart(2, '0');
+    
+    const formattedDateTime = `${day} ${month} ${year} ${hours}:${minutes}`;
+    
+    // Create message based on action type
+let actionText = '';
+let logClass = 'log-entry'; // default class for each log box
+
+// Helper: format employee as "Name (ref_id)"
+function formatEmployee(details, refId) {
+    if (details && details.name) {
+        return `${details.name} (${refId})`;
+    }
+    return `(${refId})`; // fallback if name not available
+}
+
+if (log.action === 'archive_employee') {
+    logClass += ' log-archive';
+    actionText = `<span>${log.user_id} menghapus karyawan: ${formatEmployee(log.details, log.target_employee)} dan memindahkan ke arsip.</span>`;
+} else if (log.action === 'restore_employee') {
+    logClass += ' log-restore';
+    actionText = `<span>${log.user_id} memulihkan karyawan: ${formatEmployee(log.details, log.target_employee)}</span>`;
+} else if (log.action === 'edit_employee') {
+    logClass += ' log-edit';
+    actionText = `<span>${log.user_id} mengedit karyawan: `;
+
+    if (log.details && log.details.old_name) {
+        actionText += ` ${log.details.old_name}`;
+    } else {
+        actionText += ` ${formatEmployee(log.details, log.target_employee)}`;
+    }
+
+    if (log.details && log.details.new_name) {
+        actionText += ` → menjadi ${log.details.new_name}`;
+    }
+
+    actionText += `</span>`;
+} else if (log.action === 'delete_employee') {
+    logClass += ' log-delete';
+    actionText = `<span>${log.user_id} menghapus karyawan ${formatEmployee(log.details, log.target_employee)}</span>`;
+} else if (log.action === 'add_employee') {
+    logClass += ' log-add';
+    actionText = `<span>${log.user_id} menambahkan karyawan baru: ${formatEmployee(log.details, log.target_employee)}</span>`;
+} else if (log.action === 'import_employees') {
+    logClass += ' log-import';
+    actionText = `<span>${log.user_id} mengimpor data karyawan</span>`;
+    if (log.details && log.details.added) {
+        actionText += `: ${log.details.added} karyawan ditambahkan`;
+    }
+    if (log.details && log.details.duplicates) {
+        actionText += `, ${log.details.duplicates} data duplikat`;
+    }
+} else if (log.action === 'permanent_delete_employee') {
+    logClass += ' log-delete';
+    actionText = `<span>${log.user_id} menghapus permanen karyawan: ${formatEmployee(log.details, log.target_employee)}</span>`;
+} else {
+    actionText = `<span>${log.user_id} melakukan ${log.action} pada ${formatEmployee(log.details, log.target_employee)}</span>`;
+}
+
+logEntry.className = logClass; // apply the dynamic class
+
+logEntry.innerHTML = `
+    <div class="log-timestamp">${formattedDateTime}</div>
+    <div>${actionText}</div>
+`;
+
+logsContainer.appendChild(logEntry);
+
+
+});
+    } catch (error) {
+        console.error('Error loading logs:', error);
+        document.getElementById('activityLogs').innerHTML = 
+            '<p style="text-align: center; color: rgba(255, 71, 87, 0.7);">Gagal memuat log aktivitas</p>';
+    }
+}
+
+function loadActivityLogs() {
+    fetch('/activity-logs')
+        .then(response => response.json())
+        .then(logs => {
+            const logContainer = document.getElementById('activityLogsContainer');
+            logContainer.innerHTML = ''; // Clear existing logs
+            
+            if (logs.length === 0) {
+                logContainer.innerHTML = '<p>Tidak ada aktivitas tercatat.</p>';
+                return;
+            }
+            
+            logs.forEach(log => {
+                const logElement = document.createElement('div');
+                logElement.className = 'log-entry';
+                logElement.textContent = log.formatted_message || JSON.stringify(log);
+                logContainer.appendChild(logElement);
+            });
+        })
+        .catch(error => {
+            console.error('Error loading activity logs:', error);
+            document.getElementById('activityLogsContainer').innerHTML = 
+                '<p>Error loading activity logs.</p>';
+        });
+}
+
+// Add refresh function
+function refreshLogs() {
+    loadLogs();
+}
+
+// Load logs when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    loadLogs();
+    setInterval(loadLogs, 10000);
+});
+
+    // Add these new functions for the import feature
+    function openImportModal() {
+        document.getElementById('importForm').reset();
+        document.getElementById('importProgress').style.display = 'none';
+        document.getElementById('importResults').style.display = 'none';
+        document.getElementById('importModal').style.display = 'flex';
+    }
+
+    function downloadTemplate() {
+        // Create a simple Excel template for download
+        const templateData = [
+            ['Reference ID', 'Nama Karyawan'], // Headers are now the first row
+            ['REF001', 'Nama Karyawan 1'],
+            ['REF002', 'Nama Karyawan 2'],
+            ['REF003', 'Nama Karyawan 3']
+        ];
+        
+        // Create a workbook and worksheet
+        const ws = XLSX.utils.aoa_to_sheet(templateData); // aoa = array of arrays
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "Karyawan"); // Add worksheet to workbook
+        
+        // Generate the .xlsx file and trigger download
+        // The filename and extension are now correct
+        XLSX.writeFile(wb, "template_karyawan.xlsx");
+    }
+
+// Update the import form submission to log the activity
+document.getElementById('importForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const progressElement = document.getElementById('importProgress');
+    const resultsElement = document.getElementById('importResults');
+    
+    progressElement.style.display = 'block';
+    resultsElement.style.display = 'none';
+    
+    fetch("{{ url_for('import_employees') }}", {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        progressElement.style.display = 'none';
+        resultsElement.style.display = 'block';
+        
+        if (data.success) {
+            resultsElement.innerHTML = `
+                <div class="import-success">
+                    <p><strong>Import berhasil!</strong></p>
+                    <p>${data.added} karyawan berhasil ditambahkan.</p>
+                    ${data.duplicates > 0 ? `<p>${data.duplicates} data duplicate diabaikan.</p>` : ''}
+                    ${data.errors.length > 0 ? `<p>${data.errors.length} error terjadi.</p>` : ''}
+                </div>
+            `;
+            
+            if (data.errors.length > 0) {
+                let errorsHtml = '<div class="import-errors"><p>Detail error:</p><ul>';
+                data.errors.forEach(error => {
+                    errorsHtml += `<li>${error}</li>`;
+                });
+                errorsHtml += '</ul></div>';
+                resultsElement.innerHTML += errorsHtml;
+            }
+            
+            // Refresh the page after successful import
+            setTimeout(() => {
+                location.reload();
+            }, 3000);
+        } else {
+            resultsElement.innerHTML = `
+                <div class="import-error">
+                    <p><strong>Import gagal!</strong></p>
+                    <p>${data.message}</p>
+                </div>
+            `;
+        }
+    })
+    .catch(error => {
+        progressElement.style.display = 'none';
+        resultsElement.style.display = 'block';
+        resultsElement.innerHTML = `
+            <div class="import-error">
+                <p><strong>Terjadi kesalahan!</strong></p>
+                <p>${error.message}</p>
+            </div>
+        `;
+    });
+});
+
+// Function to log import activity
+function logImportActivity(added, duplicates) {
+    // Send a request to log the import activity
+    fetch('/log-import-activity', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            added: added,
+            duplicates: duplicates
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Import activity logged:', data);
+        // Refresh logs to show the new import activity
+        loadLogs();
+    })
+    .catch(error => {
+        console.error('Error logging import activity:', error);
+    });
+}
+
+    // Update the closeModal function to handle the import modal
+    function closeModal() {
+        document.getElementById('addModal').style.display = 'none';
+        document.getElementById('editModal').style.display = 'none';
+        document.getElementById('deleteModal').style.display = 'none';
+        document.getElementById('importModal').style.display = 'none';
+        employeeToDelete = null;
+    }
+
+    // Add these styles for the import feature
+    const style = document.createElement('style');
+    style.textContent = `
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .import-instructions {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .import-instructions ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .import-instructions a {
+            color: #4da6ff;
+            text-decoration: none;
+        }
+        
+        .import-instructions a:hover {
+            text-decoration: underline;
+        }
+        
+        .import-progress {
+            margin-top: 20px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            width: 0%;
+            background-color: #4da6ff;
+            animation: progressAnimation 2s infinite;
+        }
+        
+        @keyframes progressAnimation {
+            0% { width: 0%; }
+            50% { width: 50%; }
+            100% { width: 100%; }
+        }
+        
+        .progress-text {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        
+        .import-results {
+            margin-top: 20px;
+        }
+        
+        .import-success {
+            background-color: rgba(106, 176, 76, 0.2);
+            border-left: 4px solid rgba(106, 176, 76, 1);
+            padding: 15px;
+            border-radius: 5px;
+        }
+        
+        .import-error {
+            background-color: rgba(255, 71, 87, 0.2);
+            border-left: 4px solid rgba(255, 71, 87, 1);
+            padding: 15px;
+            border-radius: 5px;
+        }
+        
+        .import-errors {
+            margin-top: 15px;
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 5px;
+        }
+        
+        .import-errors ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+    `;
+    document.head.appendChild(style);
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stema Canteen</title>
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='icon.png') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <style>
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* ⬅️ Center vertically */
+  min-height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("/static/makanan3.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  color: var(--light);
+  line-height: 1.6;
+  box-sizing: border-box;
+}
+
+.main-container {
+  display: flex;
+  gap: 30px;
+  max-width: 1400px;
+  width: 100%;
+  justify-content: center; /* ⬅️ Center horizontally */
+  align-items: center; /* ⬅️ Align children to center */
+}
+
+.container {
+  flex: 1;
+  min-width: 450px;
+  max-width: 650px;
+}
+
+.table-container {
+  flex: 2; /* give more room */
+  min-width: 600px;
+  max-width: 730px; /* wider */
+}
+
+
+@media (max-width: 1200px) {
+  .main-container {
+    flex-direction: column;
+    align-items: center; /* Keep center alignment on smaller screens */
+    gap: 20px;
+  }
+  
+  .container, .table-container {
+    width: 100%;
+    max-width: 800px;
+  }
+  
+  body {
+    padding: 20px 15px;
+  }
+}
+
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 50px 40px;
+      border-radius: 25px;
+      box-shadow: 
+        0 4px 30px rgba(0, 0, 0, 0.1),
+        inset 0 0 12px rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(11px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      text-align: center;
+      color: #fff;
+      transition: all 0.3s ease;
+      height: fit-content;
+    }
+
+    .card:hover {
+      backdrop-filter: blur(15px);
+      box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.15),
+        inset 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+
+    .recent-claims-card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 35px;
+      border-radius: 25px;
+      box-shadow: 
+        0 4px 30px rgba(0, 0, 0, 0.1),
+        inset 0 0 12px rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(11px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #fff;
+      height: 580px;
+      max-height: 600px;
+      overflow-y: auto;
+      transition: all 0.3s ease;
+    }
+
+    .recent-claims-card:hover {
+      backdrop-filter: blur(15px);
+      box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.15),
+        inset 0 0 20px rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .logo {
+      display: block;
+      margin: 0 auto 20px auto;
+      max-width: 130px;
+    }
+
+    @media (max-width: 480px) {
+      .logo {
+        max-width: 120px;
+      }
+    }
+
+    h1 {
+      font-size: 20px;
+      margin-bottom: 30px;
+      color: #ffffff;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 30px;
+    }
+
+.form-input {
+  width: 100%;
+  padding: 18px 20px;
+  font-size: 1.2rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  outline: none;
+  transition: all 0.4s ease;
+  color: #fff;
+  box-shadow: 
+    inset 0 2px 4px rgba(0, 0, 0, 0.15),
+    0 2px 8px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: relative;
+}
+
+.form-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.form-input:focus {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(179, 219, 255, 0.6);
+  box-shadow: 
+    inset 0 2px 6px rgba(0, 0, 0, 0.2),
+    0 0 0 3px rgba(120, 180, 240, 0.3),
+    0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Liquid shine effect on focus */
+.form-input:focus::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(30deg);
+  animation: liquidShine 1.5s ease-in-out;
+}
+
+@keyframes liquidShine {
+  0% {
+    transform: rotate(30deg) translate(-10%, -10%);
+  }
+  100% {
+    transform: rotate(30deg) translate(10%, 10%);
+  }
+}
+
+button[type="submit"] {
+  padding: 18px 24px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, 
+    rgba(46, 99, 171, 0.9) 0%, 
+    rgba(35, 75, 140, 0.9) 100%);
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 
+    0 6px 20px rgba(0, 0, 0, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Shine effect layer */
+button[type="submit"]::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(30deg);
+  transition: all 0.5s ease;
+  opacity: 0.7;
+}
+
+/* Liquid glass effect */
+button[type="submit"]::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 15px;
+  padding: 1px;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.4), 
+    rgba(255, 255, 255, 0.1));
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+button[type="submit"]:hover {
+  background: linear-gradient(135deg, 
+    rgba(55, 115, 195, 0.9) 0%, 
+    rgba(40, 85, 155, 0.9) 100%);
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.35),
+    inset 0 1px 2px rgba(255, 255, 255, 0.4),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.25);
+}
+
+button[type="submit"]:hover::before {
+  animation: buttonShine 1.5s ease-in-out;
+}
+
+button[type="submit"]:active {
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.2),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+}
+
+    .divider {
+      margin: 40px 0 20px;
+      height: 1px;
+      background-color: #ddd;
+    }
+
+    .admin-link {
+      display: block;
+      font-size: 1rem;
+      color: #ffffff;
+      text-decoration: none;
+      margin-top: 20px;
+    }
+
+    .admin-link:hover {
+      text-decoration: solid;
+    }
+
+    .flash-message {
+      padding: 16px 24px;
+      border-radius: 6px;
+      margin: 20px auto;
+      width: 100%;
+      text-align: center;
+      color: white;
+      font-weight: bold;
+      font-size: 1.1rem;
+      opacity: 1;
+      transition: opacity 1s ease-out;
+    }
+
+    .alert-success { 
+      background-color: #28a745; 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .alert-danger { 
+      background-color: #f34d5e; 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .user-name {
+      font-size: 1.3rem;
+      margin-top: 10px;
+      padding: 8px 16px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .card {
+        padding: 30px 20px;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      .form-input,
+      button[type="submit"] {
+        font-size: 1rem;
+      }
+    }
+    
+    .header {
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 30px;
+    }
+
+    .header h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .header p {
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.9);
+      margin: 5px 0;
+    }
+    
+    .site-footer {
+      text-align: center;
+      padding: 20px 0;
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255);
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      z-index: 1000;
+    }
+
+    /* Recent Claims Table Styles */
+    .recent-claims-title {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .claims-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    .claims-table th {
+      background-color: rgba(255, 255, 255, 0.15);
+      padding: 12px 15px;
+      text-align: left;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .claims-table td {
+      padding: 10px 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    .claims-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .claims-table tr.new-claim {
+      animation: highlightRow 3s ease;
+    }
+
+    @keyframes highlightRow {
+      0% { background-color: rgba(40, 167, 69, 0.3); }
+      100% { background-color: transparent; }
+    }
+
+    @media (max-width: 1200px) {
+      .main-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+      
+      .container, .table-container {
+        width: 100%;
+        max-width: 800px;
+      }
+      
+      body {
+        padding: 20px 15px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .claims-table {
+        font-size: 0.85rem;
+      }
+      
+      .claims-table th, 
+      .claims-table td {
+        padding: 8px 10px;
+      }
+      
+      .recent-claims-card {
+        padding: 25px 20px;
+      }
+      
+      .header h1 {
+        font-size: 1.8rem;
+      }
+      
+      .card {
+        padding: 30px 25px;
+      }
+      
+      .container, .table-container {
+        min-width: unset;
+      }
+    }
+
+    /* Scrollbar styling for the claims card */
+    .recent-claims-card::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .recent-claims-card::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+    }
+
+    .recent-claims-card::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+    }
+
+    .recent-claims-card::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.5);
+    }
+    /* Hide spin buttons in Chrome, Safari, Edge, Opera */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Hide spin buttons in Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+  </style>
+</head>
+<body>
+  <div class="main-container">
+    <!-- Left Side: Form Card -->
+    <div class="container">
+      <div class="card">
+        <img src="{{ url_for('static', filename='LOGO_KANTIN.png') }}" alt="Stella Maris Logo" class="logo" />
+        <br>
+        <div class="header">
+          <h1>Stema Canteen</h1>
+          <p>Sistem Pengambilan Konsumsi</p>
+          <p><em>"Ambil makanannya, jangan ambil hatinya"</em></p>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div id="flash-container">
+              {% for category, message in messages %}
+                <div class="flash-message alert-{{ category }}">
+                  {{ message }}
+                  {% if category == 'danger' and already_claimed_user %}
+                    <div class="user-name">{{ already_claimed_user }} sudah mengambil makanannya</div>
+                  {% endif %}
+                  {% if category == 'success' and success_user %}
+                    <div class="user-name">Selamat menikmati, {{ success_user }}!</div>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST" id="claimForm">
+          <div class="form-group">
+            <input
+              type="number"
+              name="ref_id"
+              id="refIdInput"
+              placeholder="Tap ID Card ke Card Reader Ya :)"
+              required
+              autofocus
+              class="form-input"
+            />
+          </div>
+          <button type="submit">GAS MAKAN!</button>
+        </form>
+
+        <div class="divider"></div>
+
+        <a href="/admin" class="admin-link">→ JANGAN KLIK YAA</a>
+      </div>
+    </div>
+
+    <!-- Right Side: Recent Claims Table -->
+    <div class="table-container">
+      <div class="recent-claims-card">
+        <div class="recent-claims-title">Klaim Terbaru</div>
+        <table class="claims-table" id="claimsTable">
+          <thead>
+            <tr>
+              <th>Nama Karyawan</th>
+              <th>Tanggal</th>
+              <th>Jam</th>
+            </tr>
+          </thead>
+          <tbody id="claimsTableBody">
+            <!-- Table will be populated by JavaScript -->
+          </tbody>
+        </table>
+        <br>
+        <center>Menampilkan 7 karyawan terakhir klaim</center>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio element for custom sounds -->
+  {% if play_sound %}
+    <audio id="customSound" autoplay>
+      <source src="{{ play_sound }}" type="audio/mpeg">
+    </audio>
+  {% endif %}
+
+  <footer class="site-footer">
+© 2025 IT Stella Maris School. All rights reserved.
+</footer>
+
+  <!-- Fallback audio elements -->
+  <audio id="warningSound" src="{{ url_for('static', filename='sounds/sudah_diambil.mp3') }}"></audio>
+  <audio id="successSound" src="{{ url_for('static', filename='sounds/sukses_ambil.mp3') }}"></audio>
+  <audio id="errorSound" src="{{ url_for('static', filename='sounds/hubungi_hrd.mp3') }}"></audio>
+  <script>
+    // Function to fetch recent claims from server
+    async function fetchRecentClaims() {
+      try {
+        const response = await fetch('/recent-claims');
+        const claims = await response.json();
+
+        const tableBody = document.getElementById('claimsTableBody');
+        tableBody.innerHTML = '';
+
+        // Only show the first 5 claims (most recent)
+        const maxClaims = 7;
+        const claimsToShow = claims.slice(0, maxClaims);
+
+        claimsToShow.forEach((claim, index) => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${claim.name}</td>
+            <td>${claim.date}</td>
+            <td>${claim.time}</td>
+          `;
+          tableBody.appendChild(row);
+        });
+
+        // Show a message if there are no claims
+        if (claimsToShow.length === 0) {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td colspan="4" style="text-align: center; padding: 20px;">
+              Belum ada klaim hari ini
+            </td>
+          `;
+          tableBody.appendChild(row);
+        }
+      } catch (error) {
+        console.error('Error fetching recent claims:', error);
+        
+        // Show error message in table
+        const tableBody = document.getElementById('claimsTableBody');
+        tableBody.innerHTML = `
+          <tr>
+            <td colspan="4" style="text-align: center; padding: 20px; color: #ff6b6b;">
+              Error loading recent claims
+            </td>
+          </tr>
+        `;
+      }
+    }
+
+    // Fetch claims on page load and set interval for updates
+    document.addEventListener('DOMContentLoaded', function() {
+      fetchRecentClaims();
+      setInterval(fetchRecentClaims, 3000); // Update every 3 seconds
+      
+      // Flash message timeout
+      setTimeout(function () {
+        const messages = document.querySelectorAll('.flash-message');
+        messages.forEach(function (msg) {
+          msg.style.opacity = '0';
+          setTimeout(() => msg.remove(), 1000);
+        });
+      }, 7000);
+      
+      // Play appropriate sound based on the situation
+      const customSound = document.getElementById("customSound");
+      if (customSound) {
+        customSound.play();
+      } else {
+        const dangerMessages = document.querySelectorAll(".alert-danger");
+        const successMessages = document.querySelectorAll(".alert-success");
+        
+        if (dangerMessages.length > 0) {
+          document.getElementById("warningSound").play();
+        } else if (successMessages.length > 0) {
+          document.getElementById("successSound").play();
+        }
+      }
+    });
+  </script>
+</body>
+</html>
