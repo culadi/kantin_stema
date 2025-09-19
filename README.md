@@ -168,4 +168,5 @@ Aplikasi secara otomatis menjalankan tugas pembersihan file suara TTS lama setia
 
 ## 📄 Lisensi
 
-Proprietary - Dimiliki oleh STEMA.
+
+Proprietary - Dimiliki oleh Stella Maris International Education.
